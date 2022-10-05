@@ -9,6 +9,12 @@
 
   outputs = { self, nixpkgs }: {
     nixosConfigurations = {
+      sparkle = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/desktop/configuration.nix
+        ];
+      };
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
