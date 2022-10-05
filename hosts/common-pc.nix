@@ -86,6 +86,7 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
+    (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
     tailscale
     gnomeExtensions.blur-my-shell
     gnomeExtensions.dash-to-panel
@@ -140,15 +141,21 @@
   virtualisation.libvirtd.enable = true;
   programs.gnupg.agent.enable = true;
 
-  # Chromium config
+  # Overlays
   nixpkgs.overlays = [
     (self: super: {
      google-chrome = super.google-chrome.override {
        commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
       };
     })
+    (self: super: {
+      mpv = super.wrapMpv self.mpv-unwrapped {
+        scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ];
+      };
+    })
   ];
 
+  # Chromium config
   programs.chromium = {
     enable = true;
     extraOpts = {
