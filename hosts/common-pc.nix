@@ -131,6 +131,7 @@
     yt-dlp
     radeontop
     qbittorrent
+    tree
   ];
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
