@@ -8,6 +8,10 @@
       ../common-pc.nix
     ];
 
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-intel" "8821cu" ];
@@ -63,7 +67,6 @@
     useDHCP = lib.mkDefault false;
     hostName = "sparkle";
   };
-  #nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.video.hidpi.enable = lib.mkDefault true;
 

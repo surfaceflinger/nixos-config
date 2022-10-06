@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # zram swap
   zramSwap.enable = true;
 
@@ -50,7 +46,10 @@
   security.rtkit.enable = true;
   hardware = {
     pulseaudio.enable = false;
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+    };
   };
   services.pipewire = {
     enable = true;
@@ -133,6 +132,8 @@
     radeontop
     qbittorrent
     tree
+    ark
+    onlyoffice-bin
   ];
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -181,8 +182,10 @@
 
   # Hardened profile fixes/overrides/additions
   security = {
+    lockKernelModules = false;
     chromiumSuidSandbox.enable = true;
     unprivilegedUsernsClone = true;
+    allowSimultaneousMultithreading = true;
     pam.loginLimits = [{ domain = "*"; item = "core"; type = "hard"; value = "0"; }];
   };
   systemd.coredump.enable = false;
@@ -191,6 +194,13 @@
   # Flakes support
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
+  };
+
+  # GC
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # stateVersion
