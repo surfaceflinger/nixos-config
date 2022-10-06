@@ -46,6 +46,9 @@
       geary
     ]);
 
+  ## Fix cursors in QT software
+  environment.variables = {QT_QPA_PLATFORM = "xcb";};
+
   # Sound
   security.rtkit.enable = true;
   hardware = {
