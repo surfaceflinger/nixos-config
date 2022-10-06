@@ -151,11 +151,19 @@
 
   # Overlays
   nixpkgs.overlays = [
+    ## Dark mode in Google Chrome including websites
     (self: super: {
       google-chrome = super.google-chrome.override {
         commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
       };
     })
+    ## Install OpenAsar for Discord
+    (self: super: {
+      discord = super.discord.override {
+        withOpenASAR = true;
+      };
+    })
+    ## Install scripts for mpv
     (self: super: {
       mpv = super.wrapMpv self.mpv-unwrapped {
         scripts = [self.mpvScripts.youtube-quality self.mpvScripts.mpris];
