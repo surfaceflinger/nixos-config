@@ -217,6 +217,12 @@
     options = "--delete-older-than 7d";
   };
 
+  # Limit generations
+  boot.loader = {
+    systemd-boot.configurationLimit = 5;
+    grub.configurationLimit = 5;
+  };
+
   # stateVersion
   system.stateVersion = "22.11";
 }
