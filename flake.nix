@@ -7,7 +7,10 @@
     };
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = {
+    self,
+    nixpkgs,
+  }: {
     nixosConfigurations = {
       sparkle = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

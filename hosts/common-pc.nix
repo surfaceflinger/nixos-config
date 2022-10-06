@@ -1,18 +1,20 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # zram swap
   zramSwap.enable = true;
 
   # Networking
   networking = {
     networkmanager.enable = true;
-  
+
     firewall = {
       enable = true;
       allowedTCPPorts = [];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [config.services.tailscale.port];
+      trustedInterfaces = ["tailscale0"];
       checkReversePath = "loose";
     };
   };
@@ -29,18 +31,20 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-    gnome-console
-  ]) ++ (with pkgs.gnome; [
-    cheese
-    gnome-music
-    gedit
-    epiphany
-    geary
-  ]);
+
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-photos
+      gnome-tour
+      gnome-console
+    ])
+    ++ (with pkgs.gnome; [
+      cheese
+      gnome-music
+      gedit
+      epiphany
+      geary
+    ]);
 
   # Sound
   security.rtkit.enable = true;
@@ -64,12 +68,14 @@
     sudo.enable = false;
     doas = {
       enable = true;
-      extraRules = [{
-        users = [ "root" ];
-        groups = [ "wheel" ];
-        keepEnv = true;
-        persist = true;
-      }];
+      extraRules = [
+        {
+          users = ["root"];
+          groups = ["wheel"];
+          keepEnv = true;
+          persist = true;
+        }
+      ];
     };
   };
 
@@ -77,7 +83,7 @@
 
   users.users.nat = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" "networkmanager" ];
+    extraGroups = ["wheel" "libvirtd" "networkmanager"];
     shell = pkgs.zsh;
   };
 
@@ -133,10 +139,11 @@
     qbittorrent
     tree
     ark
+    krita
     onlyoffice-bin
   ];
 
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   programs.gamemode.enable = true;
   services.flatpak.enable = true;
   virtualisation.libvirtd.enable = true;
@@ -145,13 +152,13 @@
   # Overlays
   nixpkgs.overlays = [
     (self: super: {
-     google-chrome = super.google-chrome.override {
-       commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
+      google-chrome = super.google-chrome.override {
+        commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
       };
     })
     (self: super: {
       mpv = super.wrapMpv self.mpv-unwrapped {
-        scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ];
+        scripts = [self.mpvScripts.youtube-quality self.mpvScripts.mpris];
       };
     })
   ];
@@ -186,7 +193,14 @@
     chromiumSuidSandbox.enable = true;
     unprivilegedUsernsClone = true;
     allowSimultaneousMultithreading = true;
-    pam.loginLimits = [{ domain = "*"; item = "core"; type = "hard"; value = "0"; }];
+    pam.loginLimits = [
+      {
+        domain = "*";
+        item = "core";
+        type = "hard";
+        value = "0";
+      }
+    ];
   };
   systemd.coredump.enable = false;
   environment.memoryAllocator.provider = "libc";
