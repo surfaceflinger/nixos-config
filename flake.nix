@@ -1,5 +1,5 @@
 {
-  description = "nat's nixos hosts configuration";
+  description = "nat's nixos configuration";
 
   inputs = {
     nixpkgs = {
@@ -13,27 +13,17 @@
   }: {
     nixosConfigurations = {
       sparkle = nixpkgs.lib.nixosSystem {
+        # Desktop
         system = "x86_64-linux";
         modules = [
-          ./hosts/desktop/configuration.nix
-        ];
-      };
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/desktop/configuration.nix
+          ./hosts/desktop
         ];
       };
       apricot = nixpkgs.lib.nixosSystem {
+        # Laptop
         system = "x86_64-linux";
         modules = [
-          ./hosts/laptop/configuration.nix
-        ];
-      };
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/laptop/configuration.nix
+          ./hosts/laptop
         ];
       };
     };
