@@ -28,9 +28,11 @@
   console.keyMap = "pl";
 
   # Desktop environment
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
 
   environment.gnome.excludePackages =
     (with pkgs; [
@@ -86,7 +88,7 @@
 
   users.users.nat = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd" "networkmanager"];
+    extraGroups = ["wheel" "libvirtd" "networkmanager" "adbusers"];
     shell = pkgs.zsh;
   };
 
@@ -130,6 +132,7 @@
     obs-studio # FOSS software for streaming and recording
     mpv # Media player
     yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
+    ffmpeg
 
     # Gaming
     polymc # Alternative launcher for Minecraft
@@ -145,38 +148,63 @@
     wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
     tree # List contents of directories in a tree-like format
     alejandra # nix beautifier (in Rust 🚀)
+    screen # Terminal multiplexer
+    unrar
+    unzip
+    p7zip
 
     # System utilities
     glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
     libva-utils # Check if VAAPI broke again
     usbutils # why, why isnt my pendrive working????? i have hardened profile btw
+    pciutils
     config.boot.kernelPackages.cpupower # Manage cpu governor and few other cool things
     spectre-meltdown-checker # Check if mitigations=off worked in style
     neofetch # Command-line system information tool
     htop # TUI task manager
     radeontop # View your AMD GPU utilization
+    dmidecode
+    lm_sensors
+    gparted
+    psmisc # killall
 
     # Development
     sublime4 # Sophisticated text editor for code, markup and prose.
     gitFull # Distributed version control
     gnupg # To encrypt DMs on WHM
+    burpsuite # Web pentesting
+    go
+    clang_14
+    llvm_14
 
     # Networking
     tailscale # Zero config VPN
+    bind # nslookup/dig
+    nmap # port scanning
+    wireshark
+    nload
+
+    # Misc
+    droidcam # Use your phone as a webcam
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
-  programs.gamemode.enable = true;
   services.flatpak.enable = true;
   virtualisation.libvirtd.enable = true;
-  programs.gnupg.agent.enable = true;
+  programs = {
+    gnupg.agent.enable = true;
+    gamemode.enable = true;
+    adb.enable = true;
+  };
 
   # Ledger udev rules
   hardware.ledger.enable = true;
 
   # Logitech udev rules and software
-  hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
 
   # Overlays
   nixpkgs.overlays = [
@@ -240,9 +268,7 @@
   environment.memoryAllocator.provider = "libc";
 
   # Flakes support
-  nix = {
-    extraOptions = "experimental-features = nix-command flakes";
-  };
+  nix.extraOptions = "experimental-features = nix-command flakes";
 
   # GC
   nix.gc = {
