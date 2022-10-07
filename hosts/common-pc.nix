@@ -152,6 +152,7 @@
     unrar
     unzip
     p7zip
+    ncdu
 
     # System utilities
     glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
