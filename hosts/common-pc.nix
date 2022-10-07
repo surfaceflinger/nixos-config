@@ -131,7 +131,7 @@
     sublime4
     virt-manager
     solaar
-    #electrum
+    electrum
     electrum-ltc
     monero-gui
     ledger-live-desktop
@@ -144,6 +144,8 @@
     ark
     krita
     onlyoffice-bin
+    nicotine-plus
+    alejandra
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
