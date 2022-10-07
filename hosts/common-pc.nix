@@ -46,7 +46,7 @@
       geary
     ]);
 
-  ## Fix cursors in QT software
+  # Fix cursors in QT software (not even sure if it helps)
   environment.variables = {QT_QPA_PLATFORM = "xcb";};
 
   # Sound
@@ -93,59 +93,76 @@
   # Other software
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
+    # Wrappers
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
     (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
-    tailscale
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.user-themes
-    gnomeExtensions.rounded-window-corners
-    gnomeExtensions.window-is-ready-remover
-    gnomeExtensions.gamemode
-    gnomeExtensions.appindicator
-    adw-gtk3
-    tela-icon-theme
-    capitaine-cursors
-    cascadia-code
-    zsh-fast-syntax-highlighting
-    gnome.gnome-tweaks
-    gnome.gnome-terminal
-    gnome.eog
-    lollypop
-    glxinfo
-    libva-utils
-    usbutils
-    config.boot.kernelPackages.cpupower
-    nano
-    wget
-    pavucontrol
-    spectre-meltdown-checker
-    gitFull
-    gnupg
-    neofetch
-    htop
-    google-chrome
-    tdesktop
-    discord
-    polymc
-    sublime4
-    virt-manager
-    solaar
-    electrum
-    electrum-ltc
-    monero-gui
-    ledger-live-desktop
-    obs-studio
-    mpv
-    yt-dlp
-    radeontop
-    qbittorrent
-    tree
-    ark
-    krita
-    onlyoffice-bin
-    nicotine-plus
-    alejandra
+
+    # Rice / UX
+    gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
+    gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
+    gnomeExtensions.user-themes # Custom shell themes
+    gnomeExtensions.rounded-window-corners # Makes every window have rounded corners
+    gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
+    gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
+    gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
+    gnome.gnome-tweaks # App to change some hidden GNOME settings
+    adw-gtk3 # libadwaita look for gtk3 software
+    tela-icon-theme # Nice looking icon theme
+    cascadia-code # S-tier font for terminal
+    zsh-fast-syntax-highlighting # Syntax highlighting for zsh
+
+    # Desktop software
+    gnome.gnome-terminal # GNOME terminal emulator that's a bit more advanced than GNOME Console
+    google-chrome # Proprietary web browser from Google
+    tdesktop # IM for drug dealers
+    discord # IM for pedophiles
+    virt-manager # Desktop user interface for managing virtual machines through libvirt\
+    pavucontrol # Best software for managing basic pipewire/pulseaudio settings
+    qbittorrent # QT BitTorrent client
+    ark # KDE archive manager
+    onlyoffice-bin # Office suite highly compatible with MS Office formats
+
+    # Media
+    gnome.eog # Best GTK photo viewer yea
+    lollypop # Best GTK music player yEAAAAH
+    nicotine-plus # GTK client for SoulSeek network
+    krita # Open source painting program. You can use it for photography too if you know what you're doing
+    obs-studio # FOSS software for streaming and recording
+    mpv # Media player
+    yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
+
+    # Gaming
+    polymc # Alternative launcher for Minecraft
+
+    # Cryptocurrencies
+    electrum # Bitcoin wallet
+    electrum-ltc # Litecoin wallet
+    monero-gui # Monero wallet
+    ledger-live-desktop # Software for Ledger hardware wallets
+
+    # CLI/TUI tools
+    nano # vim is useless
+    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
+    tree # List contents of directories in a tree-like format
+    alejandra # nix beautifier (in Rust 🚀)
+
+    # System utilities
+    glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
+    libva-utils # Check if VAAPI broke again
+    usbutils # why, why isnt my pendrive working????? i have hardened profile btw
+    config.boot.kernelPackages.cpupower # Manage cpu governor and few other cool things
+    spectre-meltdown-checker # Check if mitigations=off worked in style
+    neofetch # Command-line system information tool
+    htop # TUI task manager
+    radeontop # View your AMD GPU utilization
+
+    # Development
+    sublime4 # Sophisticated text editor for code, markup and prose.
+    gitFull # Distributed version control
+    gnupg # To encrypt DMs on WHM
+
+    # Networking
+    tailscale # Zero config VPN
   ];
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
@@ -154,21 +171,28 @@
   virtualisation.libvirtd.enable = true;
   programs.gnupg.agent.enable = true;
 
+  # Ledger udev rules
+  hardware.ledger.enable = true;
+
+  # Logitech udev rules and software
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
   # Overlays
   nixpkgs.overlays = [
-    ## Dark mode in Google Chrome including websites
+    # Dark mode in Google Chrome including websites
     (self: super: {
       google-chrome = super.google-chrome.override {
         commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
       };
     })
-    ## Install OpenAsar for Discord
+    # Install OpenAsar for Discord
     (self: super: {
       discord = super.discord.override {
         withOpenASAR = true;
       };
     })
-    ## Install scripts for mpv
+    # Install scripts for mpv
     (self: super: {
       mpv = super.wrapMpv self.mpv-unwrapped {
         scripts = [self.mpvScripts.youtube-quality self.mpvScripts.mpris];
@@ -196,9 +220,6 @@
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
     ];
   };
-
-  # Ledger udev rules
-  hardware.ledger.enable = true;
 
   # Hardened profile fixes/overrides/additions
   security = {
