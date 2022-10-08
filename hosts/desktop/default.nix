@@ -82,4 +82,10 @@
   services.udev.extraRules = ''
     ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -K -v 0bda -p 1a2b"
   '';
+
+  # FreeSync
+  services.xserver.deviceSection = ''
+    Option "VariableRefresh" "true"
+  '';
+
 }
