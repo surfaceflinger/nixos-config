@@ -173,7 +173,6 @@
     sublime4 # Sophisticated text editor for code, markup and prose.
     gitFull # Distributed version control
     gnupg # To encrypt DMs on WHM
-    burpsuite # Web pentesting
     go
     clang_14
     llvm_14
