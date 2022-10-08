@@ -46,6 +46,7 @@
   };
 
   swapDevices = [];
+  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
   networking = {
     useDHCP = lib.mkDefault false;
     hostName = "apricot";
