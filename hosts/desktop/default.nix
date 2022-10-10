@@ -87,5 +87,4 @@
   services.xserver.deviceSection = ''
     Option "VariableRefresh" "true"
   '';
-
 }

@@ -106,7 +106,6 @@ in {
 
     # Rice / UX
     adw-gtk3 # libadwaita look for gtk3 software
-    cascadia-code # S-tier font for terminal
     gnome.gnome-tweaks # App to change some hidden GNOME settings
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
     gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
@@ -192,6 +191,16 @@ in {
     # Misc
     droidcam # Use your phone as a webcam
   ];
+
+  fonts = {
+    fonts = with pkgs; [
+      cascadia-code # S-tier font for terminal
+      mypkgs.apple-emoji-linux # Apple Color emojis
+      noto-fonts
+      noto-fonts-cjk
+    ];
+    fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
+  };
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   services.flatpak.enable = true;
