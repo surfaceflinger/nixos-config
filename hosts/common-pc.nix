@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  mypkgs = import ../packages {inherit pkgs;};
+in {
   # zram swap
   zramSwap.enable = true;
 
@@ -103,39 +105,39 @@
     (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
 
     # Rice / UX
+    adw-gtk3 # libadwaita look for gtk3 software
+    cascadia-code # S-tier font for terminal
+    gnome.gnome-tweaks # App to change some hidden GNOME settings
+    gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
     gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
     gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
-    gnomeExtensions.user-themes # Custom shell themes
-    gnomeExtensions.rounded-window-corners # Makes every window have rounded corners
-    gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
     gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
-    gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
-    gnome.gnome-tweaks # App to change some hidden GNOME settings
-    adw-gtk3 # libadwaita look for gtk3 software
+    gnomeExtensions.rounded-window-corners # Makes every window have rounded corners
+    gnomeExtensions.user-themes # Custom shell themes
+    gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
     tela-icon-theme # Nice looking icon theme
-    cascadia-code # S-tier font for terminal
     zsh-fast-syntax-highlighting # Syntax highlighting for zsh
 
     # Desktop software
+    ark # KDE archive manager
+    discord # IM for pedophiles
     gnome.gnome-terminal # GNOME terminal emulator that's a bit more advanced than GNOME Console
     google-chrome # Proprietary web browser from Google
-    tdesktop # IM for drug dealers
-    discord # IM for pedophiles
-    virt-manager # Desktop user interface for managing virtual machines through libvirt\
+    onlyoffice-bin # Office suite highly compatible with MS Office formats
     pavucontrol # Best software for managing basic pipewire/pulseaudio settings
     qbittorrent # QT BitTorrent client
-    ark # KDE archive manager
-    onlyoffice-bin # Office suite highly compatible with MS Office formats
+    tdesktop # IM for drug dealers
+    virt-manager # Desktop user interface for managing virtual machines through libvirt\
 
     # Media
-    gnome.eog # Best GTK photo viewer yea
-    lollypop # Best GTK music player yEAAAAH
-    nicotine-plus # GTK client for SoulSeek network
-    krita # Open source painting program. You can use it for photography too if you know what you're doing
-    obs-studio # FOSS software for streaming and recording
-    mpv # Media player
-    yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
     ffmpeg
+    gnome.eog # Best GTK photo viewer yea
+    krita # Open source painting program. You can use it for photography too if you know what you're doing
+    lollypop # Best GTK music player yEAAAAH
+    mpv # Media player
+    nicotine-plus # GTK client for SoulSeek network
+    obs-studio # FOSS software for streaming and recording
+    yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
 
     # Gaming
     polymc # Alternative launcher for Minecraft
@@ -143,49 +145,49 @@
     # Cryptocurrencies
     electrum # Bitcoin wallet
     electrum-ltc # Litecoin wallet
-    monero-gui # Monero wallet
     ledger-live-desktop # Software for Ledger hardware wallets
+    mypkgs.feather-wallet # Monero wallet
 
     # CLI/TUI tools
-    nano # vim is useless
-    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
-    tree # List contents of directories in a tree-like format
     alejandra # nix beautifier (in Rust 🚀)
+    nano # vim is useless
+    ncdu
+    p7zip
     screen # Terminal multiplexer
+    tree # List contents of directories in a tree-like format
     unrar
     unzip
-    p7zip
-    ncdu
+    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
 
     # System utilities
-    glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
-    libva-utils # Check if VAAPI broke again
-    usbutils # why, why isnt my pendrive working????? i have hardened profile btw
-    pciutils
     config.boot.kernelPackages.cpupower # Manage cpu governor and few other cool things
-    spectre-meltdown-checker # Check if mitigations=off worked in style
-    neofetch # Command-line system information tool
-    htop # TUI task manager
-    radeontop # View your AMD GPU utilization
     dmidecode
-    lm_sensors
+    glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
     gparted
+    htop # TUI task manager
+    libva-utils # Check if VAAPI broke again
+    lm_sensors
+    neofetch # Command-line system information tool
+    pciutils
     psmisc # killall
+    radeontop # View your AMD GPU utilization
+    spectre-meltdown-checker # Check if mitigations=off worked in style
+    usbutils # why, why isnt my pendrive working????? i have hardened profile btw
 
     # Development
-    sublime4 # Sophisticated text editor for code, markup and prose.
+    clang_14
     gitFull # Distributed version control
     gnupg # To encrypt DMs on WHM
     go
-    clang_14
     llvm_14
+    sublime4 # Sophisticated text editor for code, markup and prose.
 
     # Networking
-    tailscale # Zero config VPN
     bind # nslookup/dig
-    nmap # port scanning
-    wireshark
     nload
+    nmap # port scanning
+    tailscale # Zero config VPN
+    wireshark
 
     # Misc
     droidcam # Use your phone as a webcam
@@ -235,20 +237,20 @@
   programs.chromium = {
     enable = true;
     extraOpts = {
-      "SavingBrowserHistoryDisabled" = true;
       "DefaultJavaScriptJitSetting" = 2;
       "HistoryClustersVisible" = false;
+      "SavingBrowserHistoryDisabled" = true;
     };
     extensions = [
-      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
-      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
       "gebbhagfogifgggkldgodflihgfeippi" # Return YouTube dislike
+      "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
       "mafpmfcccpbjnhfhjnllmmalhifmlcie" # TOR Snowflake
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock for YouTube
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify
+      "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
     ];
   };
 
