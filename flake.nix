@@ -16,14 +16,14 @@
         # Desktop
         system = "x86_64-linux";
         modules = [
-          ./hosts/desktop
+          ./hosts/sparkle
         ];
       };
       apricot = nixpkgs.lib.nixosSystem {
         # Laptop
         system = "x86_64-linux";
         modules = [
-          ./hosts/laptop
+          ./hosts/apricot
         ];
       };
     };
