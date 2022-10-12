@@ -4,7 +4,9 @@
   pkgs,
   ...
 }: let
-  xkomhotshot = pkgs.callPackage ./default.nix {};
+  xkomhotshot = pkgs.callPackage ./default.nix {
+    inherit pkgs;
+  };
 
   cfg = config.services.xkomhotshot;
 in {

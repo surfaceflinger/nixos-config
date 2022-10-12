@@ -1,8 +1,8 @@
 {
-  nixpkgs ? import <nixpkgs> {},
-  pythonPkgs ? nixpkgs.pkgs.python310Packages,
+  pkgs,
+  pythonPkgs ? pkgs.python310Packages,
 }: let
-  inherit (nixpkgs) pkgs;
+  inherit pkgs;
   inherit pythonPkgs;
 
   f = {
@@ -17,6 +17,7 @@
       src = builtins.fetchGit {
         url = "https://github.com/surfaceflinger/xkomhotshot.git";
         ref = "master";
+        rev = "36ec87c83d1f50ab0b0f4a471e9d3b8fd655ab90";
       };
 
       propagatedBuildInputs = [python-telegram-bot requests];
