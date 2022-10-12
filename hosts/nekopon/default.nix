@@ -121,12 +121,21 @@
     bind # nslookup/dig
     nload
     nmap # port scanning
+
+    # Misc
+    ArchiSteamFarm
   ];
 
   programs.gnupg.agent.enable = true;
 
   # xkom telegram bot
   services.xkomhotshot.enable = true;
+
+  # Quassel Core
+  services.quassel = {
+    enable = true;
+    interfaces = ["0.0.0.0"];
+  };
 
   # Hardened profile fixes/overrides/additions
   security.pam.loginLimits = [
