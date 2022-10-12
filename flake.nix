@@ -26,6 +26,13 @@
           ./hosts/apricot
         ];
       };
+      nekopon = nixpkgs.lib.nixosSystem {
+        # Oracle VPS
+        system = "aarch64-linux";
+        modules = [
+          ./hosts/nekopon
+        ];
+      };
     };
   };
 }
