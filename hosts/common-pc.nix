@@ -127,6 +127,7 @@ in {
     qbittorrent # QT BitTorrent client
     tdesktop # IM for drug dealers
     virt-manager # Desktop user interface for managing virtual machines through libvirt\
+    quasselClient # IRC client
 
     # Media
     ffmpeg
