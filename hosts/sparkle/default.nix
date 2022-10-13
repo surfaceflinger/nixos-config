@@ -37,6 +37,10 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/50dcc5fd-33f3-40a6-854a-41050068dcd2";
     fsType = "ext4";
+    options = [
+      "noatime"
+      "discard"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -75,10 +79,6 @@
   hardware.video.hidpi.enable = lib.mkDefault true;
 
   # MERKUSYS wifi dongle workaround
-  environment.systemPackages = with pkgs; [
-    usb-modeswitch
-  ];
-
   services.udev.extraRules = ''
     ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -K -v 0bda -p 1a2b"
   '';
