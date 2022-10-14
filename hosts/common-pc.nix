@@ -5,13 +5,13 @@
 }: let
   mypkgs = import ../packages {inherit pkgs;};
 in {
-  # zram swap
-  zramSwap.enable = true;
+  imports = [
+    ./common.nix
+  ];
 
   # Networking
   networking = {
     networkmanager.enable = true;
-
     firewall = {
       enable = true;
       allowedTCPPorts = [];
@@ -21,13 +21,7 @@ in {
     };
   };
 
-  time.timeZone = "Europe/Warsaw";
-
   services.tailscale.enable = true;
-
-  # Locale and keymap
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "pl";
 
   # Desktop environment
   services.xserver = {
@@ -53,9 +47,6 @@ in {
       geary
     ]);
 
-  # Fix cursors in QT software (not even sure if it helps)
-  environment.variables = {QT_QPA_PLATFORM = "xcb";};
-
   # Sound
   security.rtkit.enable = true;
   hardware = {
@@ -74,23 +65,6 @@ in {
   };
 
   # Users
-  security = {
-    sudo.enable = false;
-    doas = {
-      enable = true;
-      extraRules = [
-        {
-          users = ["root"];
-          groups = ["wheel"];
-          keepEnv = true;
-          persist = true;
-        }
-      ];
-    };
-  };
-
-  programs.zsh.enable = true;
-
   users.users.nat = {
     isNormalUser = true;
     extraGroups = ["wheel" "libvirtd" "networkmanager" "adbusers"];
@@ -98,10 +72,8 @@ in {
   };
 
   # Other software
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # Wrappers
-    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
     (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
 
     # Rice / UX
@@ -207,7 +179,6 @@ in {
   services.flatpak.enable = true;
   virtualisation.libvirtd.enable = true;
   programs = {
-    gnupg.agent.enable = true;
     gamemode.enable = true;
     adb.enable = true;
   };
@@ -252,52 +223,21 @@ in {
       "SavingBrowserHistoryDisabled" = true;
     };
     extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-      "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      "gebbhagfogifgggkldgodflihgfeippi" # Return YouTube dislike
-      "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
-      "mafpmfcccpbjnhfhjnllmmalhifmlcie" # TOR Snowflake
-      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock for YouTube
-      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify
-      "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
+      # Manifest version in parenthesis
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite (3)
+      "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies (3)
+      "gebbhagfogifgggkldgodflihgfeippi" # Return YouTube dislike (3)
+      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden (3)
+      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify (2)
+      "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs (2)
+      "mafpmfcccpbjnhfhjnllmmalhifmlcie" # TOR Snowflake (2)
+      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock for YouTube (2)
     ];
   };
 
   # Hardened profile fixes/overrides/additions
   security = {
     lockKernelModules = false;
-    chromiumSuidSandbox.enable = true;
     unprivilegedUsernsClone = true;
-    allowSimultaneousMultithreading = true;
-    pam.loginLimits = [
-      {
-        domain = "*";
-        item = "core";
-        type = "hard";
-        value = "0";
-      }
-    ];
   };
-  systemd.coredump.enable = false;
-  environment.memoryAllocator.provider = "libc";
-
-  # Flakes support
-  nix.extraOptions = "experimental-features = nix-command flakes";
-
-  # GC
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  # Limit generations
-  boot.loader = {
-    systemd-boot.configurationLimit = 5;
-    grub.configurationLimit = 5;
-  };
-
-  # stateVersion
-  system.stateVersion = "22.11";
 }

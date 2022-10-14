@@ -7,6 +7,7 @@
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     (modulesPath + "/profiles/hardened.nix")
+    ../common.nix
     ./web.nix
     ../../misc/xkom/service.nix
   ];
@@ -47,36 +48,14 @@
     checkReversePath = "loose";
   };
 
-  time.timeZone = "Europe/Warsaw";
-
   services.tailscale.enable = true;
 
-  # Locale
-  i18n.defaultLocale = "en_US.UTF-8";
-
   # Users
-  security = {
-    sudo.enable = false;
-    doas = {
-      enable = true;
-      extraRules = [
-        {
-          users = ["root"];
-          groups = ["wheel"];
-          keepEnv = true;
-          persist = true;
-        }
-      ];
-    };
-  };
-
   services.openssh = {
     enable = true;
     openFirewall = true;
     passwordAuthentication = false;
   };
-
-  programs.zsh.enable = true;
 
   users.users.nat = {
     isNormalUser = true;
@@ -91,7 +70,6 @@
   };
 
   # Other software
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # Wrappers
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
@@ -126,8 +104,6 @@
     ArchiSteamFarm
   ];
 
-  programs.gnupg.agent.enable = true;
-
   # xkom telegram bot
   services.xkomhotshot.enable = true;
 
@@ -135,28 +111,6 @@
   services.quassel = {
     enable = true;
     interfaces = ["0.0.0.0"];
-  };
-
-  # Hardened profile fixes/overrides/additions
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      item = "core";
-      type = "hard";
-      value = "0";
-    }
-  ];
-  systemd.coredump.enable = false;
-  environment.memoryAllocator.provider = "libc";
-
-  # Flakes support
-  nix.extraOptions = "experimental-features = nix-command flakes";
-
-  # GC
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
   };
 
   system.stateVersion = "22.11";
