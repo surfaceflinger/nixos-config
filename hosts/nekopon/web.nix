@@ -63,7 +63,7 @@
         listenAddresses = ["127.0.0.1"];
         serverAliases = ["www.natalia.ovh"];
         root = "/var/www/htdocs/natalia.ovh";
-        locations."/".tryFiles = "$uri $uri. =404";
+        locations."/".tryFiles = "$uri $uri/ =404";
 
         extraConfig = ''
           add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
