@@ -71,9 +71,6 @@
 
   # Other software
   environment.systemPackages = with pkgs; [
-    # Wrappers
-    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
-
     # CLI/TUI tools
     alejandra # nix beautifier (in Rust 🚀)
     nano # vim is useless

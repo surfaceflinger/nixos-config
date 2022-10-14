@@ -1,18 +1,20 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}: let
+}:
+with lib; let
   mypkgs = import ../packages {inherit pkgs;};
 in {
   # zram swap
   zramSwap.enable = true;
 
-  time.timeZone = "Europe/Warsaw";
+  time.timeZone = mkDefault "Europe/Warsaw";
 
   # Locale and keymap
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "pl";
+  i18n.defaultLocale = mkDefault "en_US.UTF-8";
+  console.keyMap = mkDefault "pl";
 
   # Users
   security = {
@@ -69,8 +71,8 @@ in {
 
   # Limit generations
   boot.loader = {
-    systemd-boot.configurationLimit = 5;
-    grub.configurationLimit = 5;
+    systemd-boot.configurationLimit = mkDefault 5;
+    grub.configurationLimit = mkDefault 5;
   };
 
   # stateVersion
