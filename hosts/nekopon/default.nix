@@ -8,7 +8,6 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     (modulesPath + "/profiles/hardened.nix")
     ../common.nix
-    ./web.nix
   ];
 
   # Boot/HW
