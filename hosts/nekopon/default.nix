@@ -9,7 +9,6 @@
     (modulesPath + "/profiles/hardened.nix")
     ../common.nix
     ./web.nix
-    ../../misc/xkom/service.nix
   ];
 
   # Boot/HW

@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1665643254,
-        "narHash": "sha256-IBVWNJxGCsshwh62eRfR6+ry3bSXmulB3VQRzLQo3hk=",
+        "lastModified": 1665732960,
+        "narHash": "sha256-WBZ+uSHKFyjvd0w4inbm0cNExYTn8lpYFcHEes8tmec=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ba187fbdc5e35322c7dff556ef2c47bddfd6e8d7",
+        "rev": "4428e23312933a196724da2df7ab78eb5e67a88e",
         "type": "github"
       },
       "original": {
@@ -16,9 +16,42 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1665723124,
+        "narHash": "sha256-J1JY2cN0L+CNDSrGkNdbiTl2EFV8hpqqsDJFICsYSBw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "31d567846255e122846548255101980162bbf641",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "xkomhotshot": "xkomhotshot"
+      }
+    },
+    "xkomhotshot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1665855890,
+        "narHash": "sha256-nTxfbDfN3swqmWkQ/MyTmfb1beJ1uVyqnmmjFZ/DLK8=",
+        "owner": "surfaceflinger",
+        "repo": "xkomhotshot",
+        "rev": "4df0034066ea6a6dbe0480e0cdc5e5ccf56b864a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "surfaceflinger",
+        "repo": "xkomhotshot",
+        "type": "github"
       }
     }
   },
