@@ -108,6 +108,7 @@ in {
     nicotine-plus # GTK client for SoulSeek network
     obs-studio # FOSS software for streaming and recording
     yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
+    mypkgs.anime4k
 
     # Gaming
     polymc # Alternative launcher for Minecraft
@@ -180,6 +181,17 @@ in {
     gamemode.enable = true;
     adb.enable = true;
   };
+
+  # Anime4K
+  environment.etc."mpv/input.conf".text = ''
+    CTRL+1 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A (Fast)"
+    CTRL+2 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B (Fast)"
+    CTRL+3 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C (Fast)"
+    CTRL+4 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A+A (Fast)"
+    CTRL+5 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B+B (Fast)"
+    CTRL+6 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"
+    CTRL+0 no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"
+  '';
 
   # Ledger udev rules
   hardware.ledger.enable = true;
