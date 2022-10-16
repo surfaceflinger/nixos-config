@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    xkomhotshot.url = "github:surfaceflinger/xkomhotshot";
+    xkomhotshot = {
+      url = "github:surfaceflinger/xkomhotshot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
