@@ -66,9 +66,7 @@ in {
 
   # Users
   users.users.nat = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd" "networkmanager" "adbusers"];
-    shell = pkgs.zsh;
+    extraGroups = ["libvirtd" "networkmanager" "adbusers"];
   };
 
   # Other software
