@@ -108,7 +108,6 @@ in {
     nicotine-plus # GTK client for SoulSeek network
     obs-studio # FOSS software for streaming and recording
     yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
-    mypkgs.anime4k
 
     # Gaming
     polymc # Alternative launcher for Minecraft
