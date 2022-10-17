@@ -31,7 +31,7 @@
       allowDiscards = true;
     };
     "HDD" = {
-      device = "/dev/disk/by-uuid/a5976932-830d-470d-8cb1-494ead3feda4";
+      device = "/dev/disk/by-uuid/a2cda069-46d4-49c8-ae91-b9188a261760";
     };
   };
 
@@ -63,7 +63,7 @@
   };
 
   fileSystems."/media/hdd" = {
-    device = "/dev/disk/by-uuid/cec58783-0ef2-46c3-a855-ec413653ca77";
+    device = "/dev/disk/by-uuid/d33701e3-0e42-472f-9326-ea93a3d79f1a";
     fsType = "ext4";
     options = [
       "noatime"
