@@ -7,6 +7,9 @@
 with lib; let
   mypkgs = import ../packages {inherit pkgs;};
 in {
+  # kernel args
+  boot.kernelParams = ["amd_iommu=on" "intel_iommu=on"];
+
   # zram swap
   zramSwap.enable = true;
 

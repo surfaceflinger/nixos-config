@@ -19,6 +19,8 @@
     efi.canTouchEfiVariables = true;
   };
 
+  # Kernel and modules
+  boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
   boot.initrd.kernelModules = ["nvme"];
   boot.cleanTmpDir = true;

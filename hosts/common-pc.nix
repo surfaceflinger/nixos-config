@@ -9,6 +9,9 @@ in {
     ./common.nix
   ];
 
+  # kernel args
+  boot.kernelParams = ["mitigations=off"];
+
   # Networking
   networking = {
     networkmanager.enable = true;
