@@ -10,17 +10,19 @@
     ../common-pc.nix
   ];
 
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Bootloader/Kernel/Modules
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci"];
+    kernelPackages = pkgs.linuxPackages_latest;
+    extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
+    kernelModules = ["kvm-intel"];
+  };
 
-  # Kernel and modules
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
-
+  # LUKS
   boot.initrd.luks.devices = {
     "apricot" = {
       device = "/dev/disk/by-uuid/b148d5cd-93d5-4466-b186-974674fc6e0a";
@@ -28,25 +30,27 @@
     };
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c2ddb6eb-a2e7-4577-a369-12a53e7e5a19";
-    fsType = "ext4";
-    options = [
-      "noatime"
-      "discard"
-    ];
+  # Filesystems
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/c2ddb6eb-a2e7-4577-a369-12a53e7e5a19";
+      fsType = "ext4";
+      options = [
+        "noatime"
+        "discard"
+      ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/72EE-43DD";
+      fsType = "vfat";
+      options = [
+        "noatime"
+        "discard"
+      ];
+    };
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/72EE-43DD";
-    fsType = "vfat";
-    options = [
-      "noatime"
-      "discard"
-    ];
-  };
-
-  swapDevices = [];
+  # Misc
   powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
   networking = {
     useDHCP = lib.mkDefault false;

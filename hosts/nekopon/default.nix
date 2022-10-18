@@ -10,29 +10,32 @@
     ../common.nix
   ];
 
-  # Boot/HW
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 1;
+  # Bootloader/Kernel/Modules
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 1;
+      };
+      efi.canTouchEfiVariables = true;
     };
-    efi.canTouchEfiVariables = true;
+    initrd = {
+      availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
+      kernelModules = ["nvme"];
+    };
+    cleanTmpDir = true;
   };
-
-  # Kernel and modules
-  boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
-  boot.initrd.kernelModules = ["nvme"];
-  boot.cleanTmpDir = true;
 
   # Filesystems
-  fileSystems."/" = {
-    device = "/dev/sda1";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/sda15";
-    fsType = "vfat";
+  fileSystems = {
+    "/" = {
+      device = "/dev/sda1";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/sda15";
+      fsType = "vfat";
+    };
   };
 
   # zram swap
@@ -97,6 +100,4 @@
     enable = true;
     interfaces = ["0.0.0.0"];
   };
-
-  system.stateVersion = "22.11";
 }

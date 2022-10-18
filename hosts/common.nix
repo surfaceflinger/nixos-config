@@ -49,7 +49,6 @@ in {
   };
 
   # Other software
-
   environment.systemPackages = with pkgs; [
     # Wrappers
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
@@ -88,6 +87,13 @@ in {
     systemd-boot.configurationLimit = mkDefault 5;
     grub.configurationLimit = mkDefault 5;
   };
+
+  # Auto upgrade and optimise
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:surfaceflinger/nixos-config";
+  };
+  nix.settings.auto-optimise-store = true;
 
   # stateVersion
   system.stateVersion = "22.11";
