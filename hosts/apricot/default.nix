@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -16,10 +15,10 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci"];
+    initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
-    kernelModules = ["kvm-intel"];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+    kernelModules = [ "kvm-intel" ];
   };
 
   # LUKS
@@ -59,7 +58,7 @@
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # VAAPI
-  hardware.opengl.extraPackages = with pkgs; [vaapiIntel];
+  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
 
   # Personal preference on how logind should handle lid switch.
   services.logind = {

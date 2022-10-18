@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  modulesPath,
-  ...
+{ config
+, pkgs
+, modulesPath
+, ...
 }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -20,8 +19,8 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
-      kernelModules = ["nvme"];
+      availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
+      kernelModules = [ "nvme" ];
     };
     cleanTmpDir = true;
   };
@@ -45,9 +44,9 @@
   networking.hostName = "nekopon";
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [];
-    allowedUDPPorts = [config.services.tailscale.port];
-    trustedInterfaces = ["tailscale0"];
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
+    trustedInterfaces = [ "tailscale0" ];
     checkReversePath = "loose";
   };
 
@@ -98,6 +97,6 @@
   # Quassel Core
   services.quassel = {
     enable = true;
-    interfaces = ["0.0.0.0"];
+    interfaces = [ "0.0.0.0" ];
   };
 }

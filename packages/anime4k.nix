@@ -1,7 +1,7 @@
-{
-  pkgs,
-  stdenv,
-  fetchzip,
+{ pkgs
+, stdenv
+, fetchzip
+,
 }:
 stdenv.mkDerivation rec {
   pname = "Anime4k";

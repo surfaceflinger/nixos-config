@@ -1,7 +1,7 @@
-{
-  pkgs,
-  stdenv,
-  fetchurl,
+{ pkgs
+, stdenv
+, fetchurl
+,
 }:
 stdenv.mkDerivation rec {
   name = "apple-emoji-linux";

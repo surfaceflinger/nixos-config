@@ -1,14 +1,14 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib; let
-  mypkgs = import ../packages {inherit pkgs;};
-in {
+  mypkgs = import ../packages { inherit pkgs; };
+in
+{
   # kernel args
-  boot.kernelParams = ["amd_iommu=on" "intel_iommu=on"];
+  boot.kernelParams = [ "amd_iommu=on" "intel_iommu=on" ];
 
   # zram swap
   zramSwap.enable = true;
@@ -26,8 +26,8 @@ in {
       enable = true;
       extraRules = [
         {
-          users = ["root"];
-          groups = ["wheel"];
+          users = [ "root" ];
+          groups = [ "wheel" ];
           keepEnv = true;
           persist = true;
         }
@@ -39,7 +39,7 @@ in {
 
   users.users.nat = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBeWbH2L99MoMuT2a1nzmpI86VBht/io2TBraa2Pe98F nat@sparkle"

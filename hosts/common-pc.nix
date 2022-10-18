@@ -1,25 +1,26 @@
+{ config
+, pkgs
+, ...
+}:
+let
+  mypkgs = import ../packages { inherit pkgs; };
+in
 {
-  config,
-  pkgs,
-  ...
-}: let
-  mypkgs = import ../packages {inherit pkgs;};
-in {
   imports = [
     ./common.nix
   ];
 
   # kernel args
-  boot.kernelParams = ["mitigations=off"];
+  boot.kernelParams = [ "mitigations=off" ];
 
   # Networking
   networking = {
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [config.services.tailscale.port];
-      trustedInterfaces = ["tailscale0"];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      trustedInterfaces = [ "tailscale0" ];
       checkReversePath = "loose";
     };
   };
@@ -69,7 +70,7 @@ in {
 
   # Users
   users.users.nat = {
-    extraGroups = ["libvirtd" "networkmanager" "adbusers"];
+    extraGroups = [ "libvirtd" "networkmanager" "adbusers" ];
   };
 
   # Other software
@@ -173,10 +174,10 @@ in {
       noto-fonts
       noto-fonts-cjk
     ];
-    fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
+    fontconfig.defaultFonts.emoji = [ "Apple Color Emoji" ];
   };
 
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.flatpak.enable = true;
   virtualisation.libvirtd.enable = true;
   programs = {
@@ -221,7 +222,7 @@ in {
     # Install scripts for mpv
     (self: super: {
       mpv = super.wrapMpv self.mpv-unwrapped {
-        scripts = [self.mpvScripts.youtube-quality self.mpvScripts.mpris];
+        scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ];
       };
     })
   ];

@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -17,12 +16,12 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-      kernelModules = ["amdgpu"];
+      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+      kernelModules = [ "amdgpu" ];
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = [config.boot.kernelPackages.rtl8821cu];
-    kernelModules = ["kvm-intel" "8821cu"];
+    extraModulePackages = [ config.boot.kernelPackages.rtl8821cu ];
+    kernelModules = [ "kvm-intel" "8821cu" ];
   };
 
   # LUKS
