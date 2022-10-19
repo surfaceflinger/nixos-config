@@ -22,6 +22,8 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/sparkle
+              ./hosts/common.nix
+              ./hosts/common-pc.nix
             ];
           };
           apricot = lib.nixosSystem {
@@ -29,6 +31,8 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/apricot
+              ./hosts/common.nix
+              ./hosts/common-pc.nix
             ];
           };
           nekopon = lib.nixosSystem {
@@ -37,6 +41,7 @@
             modules = [
               xkomhotshot.nixosModule
               ./hosts/nekopon
+              ./hosts/common.nix
             ];
           };
         };

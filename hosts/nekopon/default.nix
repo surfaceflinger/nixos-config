@@ -6,7 +6,6 @@
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     (modulesPath + "/profiles/hardened.nix")
-    ../common.nix
   ];
 
   # Bootloader/Kernel/Modules

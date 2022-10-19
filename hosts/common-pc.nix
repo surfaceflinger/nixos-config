@@ -6,10 +6,6 @@ let
   mypkgs = import ../packages { inherit pkgs; };
 in
 {
-  imports = [
-    ./common.nix
-  ];
-
   # kernel args
   boot.kernelParams = [ "mitigations=off" ];
 
@@ -114,7 +110,7 @@ in
     yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
 
     # Gaming
-    polymc # Alternative launcher for Minecraft
+    #polymc # Alternative launcher for Minecraft
 
     # Cryptocurrencies
     electrum # Bitcoin wallet
