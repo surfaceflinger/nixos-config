@@ -1,11 +1,7 @@
 { config
 , pkgs
 , ...
-}:
-let
-  mypkgs = import ../packages { inherit pkgs; };
-in
-{
+}: {
   # kernel args
   boot.kernelParams = [ "noibrs" "noibpb" "nopti" "nospectre_v2" "nospectre_v1" "l1tf=off" "nospec_store_bypass_disable" "no_stf_barrier" "mds=off" "tsx=on" "tsx_async_abort=off" "mitigations=off" ];
 
@@ -110,16 +106,18 @@ in
     yt-dlp # Download manager for video and audio from YouTube and over 1,000 other video hosting websites
 
     # Gaming
-    #polymc # Alternative launcher for Minecraft
+    prismlauncher # Alternative launcher for Minecraft
 
     # Cryptocurrencies
     electrum # Bitcoin wallet
     electrum-ltc # Litecoin wallet
     ledger-live-desktop # Software for Ledger hardware wallets
-    mypkgs.feather-wallet # Monero wallet
+    feather-wallet # Monero wallet
 
     # CLI/TUI tools
     alejandra # nix beautifier (in Rust 🚀)
+    nixpkgs-fmt
+    deadnix
     nano # vim is useless
     ncdu
     p7zip
@@ -166,7 +164,7 @@ in
   fonts = {
     fonts = with pkgs; [
       cascadia-code # S-tier font for terminal
-      mypkgs.apple-emoji-linux # Apple Color emojis
+      apple-emoji-linux # Apple Color emojis
       noto-fonts
       noto-fonts-cjk
     ];
@@ -182,13 +180,13 @@ in
   };
 
   # Anime4K
-  environment.etc."mpv/input.conf".text = ''
-    CTRL+1 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A (Fast)"
-    CTRL+2 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B (Fast)"
-    CTRL+3 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C (Fast)"
-    CTRL+4 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A+A (Fast)"
-    CTRL+5 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B+B (Fast)"
-    CTRL+6 no-osd change-list glsl-shaders set "${mypkgs.anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${mypkgs.anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"
+  environment.etc."mpv/input.conf".text = with pkgs; ''
+    CTRL+1 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A (Fast)"
+    CTRL+2 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B (Fast)"
+    CTRL+3 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C (Fast)"
+    CTRL+4 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_M.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode A+A (Fast)"
+    CTRL+5 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_M.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_Soft_S.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode B+B (Fast)"
+    CTRL+6 no-osd change-list glsl-shaders set "${anime4k}/usr/share/shaders/Anime4K_Clamp_Highlights.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_Denoise_CNN_x2_M.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x2.glsl:${anime4k}/usr/share/shaders/Anime4K_AutoDownscalePre_x4.glsl:${anime4k}/usr/share/shaders/Anime4K_Restore_CNN_S.glsl:${anime4k}/usr/share/shaders/Anime4K_Upscale_CNN_x2_S.glsl"; show-text "Anime4K: Mode C+A (Fast)"
     CTRL+0 no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"
   '';
 
@@ -203,23 +201,15 @@ in
 
   # Overlays
   nixpkgs.overlays = [
-    # Dark mode in Google Chrome including websites
     (self: super: {
-      google-chrome = super.google-chrome.override {
-        commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";
-      };
-    })
-    # Install OpenAsar for Discord
-    (self: super: {
-      discord = super.discord.override {
-        withOpenASAR = true;
-      };
-    })
-    # Install scripts for mpv
-    (self: super: {
-      mpv = super.wrapMpv self.mpv-unwrapped {
-        scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ];
-      };
+      # Packages
+      anime4k = super.callPackage ../packages/anime4k { };
+      apple-emoji-linux = super.callPackage ../packages/apple-emoji-linux { };
+      feather-wallet = super.callPackage ../packages/feather-wallet { };
+      # Overrides
+      google-chrome = super.google-chrome.override { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; };
+      discord = super.discord.override { withOpenASAR = true; };
+      mpv = super.wrapMpv self.mpv-unwrapped { scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ]; };
     })
   ];
 

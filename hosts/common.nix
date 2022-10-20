@@ -3,10 +3,7 @@
 , lib
 , ...
 }:
-with lib; let
-  mypkgs = import ../packages { inherit pkgs; };
-in
-{
+with lib; {
   # kernel args
   boot.kernelParams = [ "amd_iommu=on" "intel_iommu=on" ];
 
