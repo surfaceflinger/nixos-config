@@ -159,6 +159,7 @@
 
     # Misc
     droidcam # Use your phone as a webcam
+    scrcpy
     spice-gtk
   ];
 
