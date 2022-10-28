@@ -17,7 +17,19 @@
     };
   };
 
-  services.tailscale.enable = true;
+  services = {
+    # Tailscale
+    tailscale.enable = true;
+    # mDNS
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
+  };
 
   # Desktop environment
   services.xserver = {
@@ -59,6 +71,9 @@
     pulse.enable = true;
     jack.enable = true;
   };
+
+  # Printing
+  services.printing.enable = true;
 
   # Users
   users.users.nat = {
