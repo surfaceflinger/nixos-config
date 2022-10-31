@@ -6,28 +6,13 @@
   boot.kernelParams = [ "noibrs" "noibpb" "nopti" "nospectre_v2" "nospectre_v1" "l1tf=off" "nospec_store_bypass_disable" "no_stf_barrier" "mds=off" "tsx=on" "tsx_async_abort=off" "mitigations=off" ];
 
   # Networking
-  networking = {
-    networkmanager.enable = true;
-    firewall = {
+  networking.networkmanager.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
       enable = true;
-      allowedTCPPorts = [ ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-      trustedInterfaces = [ "tailscale0" ];
-      checkReversePath = "loose";
-    };
-  };
-
-  services = {
-    # Tailscale
-    tailscale.enable = true;
-    # mDNS
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      publish = {
-        enable = true;
-        userServices = true;
-      };
+      userServices = true;
     };
   };
 
@@ -43,16 +28,29 @@
 
   environment.gnome.excludePackages =
     (with pkgs; [
-      gnome-photos
-      gnome-tour
       gnome-console
+      gnome-photos
+      gnome-text-editor
+      gnome-tour
+      gnome-user-docs
     ])
     ++ (with pkgs.gnome; [
+      baobab
       cheese
-      gnome-music
-      gedit
       epiphany
+      evince
       geary
+      gedit
+      gnome-characters
+      gnome-contacts
+      gnome-logs
+      gnome-maps
+      gnome-music
+      gnome-software
+      gnome-system-monitor
+      simple-scan
+      totem
+      yelp
     ]);
 
   # Sound
@@ -73,12 +71,14 @@
   };
 
   # Printing
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    webInterface = false;
+    stateless = true;
+  };
 
   # Users
-  users.users.nat = {
-    extraGroups = [ "libvirtd" "networkmanager" "adbusers" ];
-  };
+  users.users.nat.extraGroups = [ "libvirtd" "networkmanager" "adbusers" ];
 
   # Other software
   environment.systemPackages = with pkgs; [
@@ -96,23 +96,20 @@
     gnomeExtensions.user-themes # Custom shell themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
     tela-icon-theme # Nice looking icon theme
-    zsh-fast-syntax-highlighting # Syntax highlighting for zsh
 
     # Desktop software
-    ark # KDE archive manager
     discord # IM for pedophiles
     gnome.gnome-terminal # GNOME terminal emulator that's a bit more advanced than GNOME Console
     google-chrome # Proprietary web browser from Google
     onlyoffice-bin # Office suite highly compatible with MS Office formats
     pavucontrol # Best software for managing basic pipewire/pulseaudio settings
     qbittorrent # QT BitTorrent client
+    quasselClient # IRC client
     tdesktop # IM for drug dealers
     virt-manager # Desktop user interface for managing virtual machines through libvirt\
-    quasselClient # IRC client
 
     # Media
     ffmpeg
-    gnome.eog # Best GTK photo viewer yea
     krita # Open source painting program. You can use it for photography too if you know what you're doing
     lollypop # Best GTK music player yEAAAAH
     mpv # Media player
@@ -126,36 +123,14 @@
     # Cryptocurrencies
     electrum # Bitcoin wallet
     electrum-ltc # Litecoin wallet
-    ledger-live-desktop # Software for Ledger hardware wallets
     feather-wallet # Monero wallet
-
-    # CLI/TUI tools
-    alejandra # nix beautifier (in Rust 🚀)
-    nixpkgs-fmt
-    deadnix
-    nano # vim is useless
-    ncdu
-    p7zip
-    screen # Terminal multiplexer
-    tree # List contents of directories in a tree-like format
-    unrar
-    unzip
-    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
+    ledger-live-desktop # Software for Ledger hardware wallets
 
     # System utilities
-    config.boot.kernelPackages.cpupower # Manage cpu governor and few other cool things
-    dmidecode
     glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
-    gparted
-    htop # TUI task manager
     libva-utils # Check if VAAPI broke again
-    lm_sensors
-    neofetch # Command-line system information tool
-    pciutils
-    psmisc # killall
     radeontop # View your AMD GPU utilization
-    spectre-meltdown-checker # Check if mitigations=off worked in style
-    usbutils # why, why isnt my pendrive working????? i have hardened profile btw
+    wireshark
 
     # Development
     clang_14
@@ -165,23 +140,16 @@
     llvm_14
     sublime4 # Sophisticated text editor for code, markup and prose.
 
-    # Networking
-    bind # nslookup/dig
-    nload
-    nmap # port scanning
-    tailscale # Zero config VPN
-    wireshark
-
     # Misc
     droidcam # Use your phone as a webcam
     scrcpy
-    spice-gtk
+    spice-gtk # Needed for simple usb forwarding in virt-manager
   ];
 
   fonts = {
     fonts = with pkgs; [
-      cascadia-code # S-tier font for terminal
       apple-emoji-linux # Apple Color emojis
+      cascadia-code # S-tier font for terminal
       noto-fonts
       noto-fonts-cjk
     ];
@@ -224,8 +192,8 @@
       apple-emoji-linux = super.callPackage ../packages/apple-emoji-linux { };
       feather-wallet = super.callPackage ../packages/feather-wallet { };
       # Overrides
-      google-chrome = super.google-chrome.override { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; };
       discord = super.discord.override { withOpenASAR = true; };
+      google-chrome = super.google-chrome.override { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; };
       mpv = super.wrapMpv self.mpv-unwrapped { scripts = [ self.mpvScripts.youtube-quality self.mpvScripts.mpris ]; };
     })
   ];
@@ -243,17 +211,11 @@
       "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite (3)
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies (3)
       "gebbhagfogifgggkldgodflihgfeippi" # Return YouTube dislike (3)
-      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden (3)
-      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify (2)
       "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs (2)
       "mafpmfcccpbjnhfhjnllmmalhifmlcie" # TOR Snowflake (2)
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock for YouTube (2)
+      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden (3)
+      "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify (2)
     ];
-  };
-
-  # Hardened profile fixes/overrides/additions
-  security = {
-    lockKernelModules = false;
-    unprivilegedUsernsClone = true;
   };
 }

@@ -36,20 +36,8 @@
     };
   };
 
-  # zram swap
-  zramSwap.enable = true;
-
   # Networking
   networking.hostName = "nekopon";
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-    trustedInterfaces = [ "tailscale0" ];
-    checkReversePath = "loose";
-  };
-
-  services.tailscale.enable = true;
 
   # Users
   services.openssh = {
@@ -60,32 +48,6 @@
 
   # Other software
   environment.systemPackages = with pkgs; [
-    # CLI/TUI tools
-    alejandra # nix beautifier (in Rust 🚀)
-    nano # vim is useless
-    ncdu
-    p7zip
-    screen # Terminal multiplexer
-    tree # List contents of directories in a tree-like format
-    unrar
-    unzip
-    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
-
-    # System utilities
-    htop # TUI task manager
-    neofetch # Command-line system information tool
-    pciutils
-    psmisc # killall
-
-    # Development
-    gitFull # Distributed version control
-    gnupg # To encrypt DMs on WHM
-
-    # Networking
-    bind # nslookup/dig
-    nload
-    nmap # port scanning
-
     # Misc
     ArchiSteamFarm
   ];

@@ -13,7 +13,6 @@
     { self
     , nixpkgs
     , xkomhotshot
-    ,
     }:
       with nixpkgs; {
         nixosConfigurations = {
@@ -22,8 +21,9 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/sparkle
-              ./hosts/common.nix
-              ./hosts/common-pc.nix
+              ./hosts/common-minimal.nix
+              ./hosts/common-standard.nix
+              ./hosts/common-desktop.nix
             ];
           };
           apricot = lib.nixosSystem {
@@ -31,17 +31,19 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/apricot
-              ./hosts/common.nix
-              ./hosts/common-pc.nix
+              ./hosts/common-minimal.nix
+              ./hosts/common-standard.nix
+              ./hosts/common-desktop.nix
             ];
           };
           nekopon = lib.nixosSystem {
-            # Oracle VPS
+            # VPS @ Oracle Cloud
             system = "aarch64-linux";
             modules = [
-              xkomhotshot.nixosModule
               ./hosts/nekopon
-              ./hosts/common.nix
+              ./hosts/common-minimal.nix
+              ./hosts/common-standard.nix
+              xkomhotshot.nixosModule
             ];
           };
         };
