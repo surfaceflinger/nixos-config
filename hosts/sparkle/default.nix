@@ -101,4 +101,12 @@
   services.xserver.deviceSection = ''
     Option "VariableRefresh" "true"
   '';
+
+  # Disable autoupgrade
+  system.autoUpgrade.enable = false;
+
+  # Extra packages
+  environment.systemPackages = with pkgs; [
+    pcsx2 # ps2 emu
+  ];
 }

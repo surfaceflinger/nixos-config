@@ -87,7 +87,7 @@ with lib; {
 
   # Auto upgrade and optimise
   system.autoUpgrade = {
-    enable = true;
+    enable = mkDefault true;
     flake = "github:surfaceflinger/nixos-config";
   };
   nix.settings.auto-optimise-store = true;
