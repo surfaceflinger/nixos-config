@@ -12,6 +12,13 @@
   };
   services.tailscale.enable = true;
 
+  # Users
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    passwordAuthentication = false;
+  };
+
   # Other software
   environment.systemPackages = with pkgs; [
     # Rice / UX
