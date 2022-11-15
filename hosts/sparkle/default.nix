@@ -102,6 +102,9 @@
     Option "VariableRefresh" "true"
   '';
 
+  # AMD Overclocking
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+
   # Disable autoupgrade
   system.autoUpgrade.enable = false;
 
