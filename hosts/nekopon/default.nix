@@ -54,4 +54,7 @@
     interfaces = [ "0.0.0.0" ];
   };
   systemd.services.quassel.after = [ "network-online.target" ];
+
+  # AdGuard Home
+  services.adguardhome.enable = true;
 }
