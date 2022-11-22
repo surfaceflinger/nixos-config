@@ -58,6 +58,12 @@
     nmap # port scanning
   ];
 
+  programs.nano.nanorc = ''
+    set tabsize 2
+    set tabstospaces
+    set autoindent
+  '';
+
   # Hardened profile fixes/overrides/additions
   security = {
     lockKernelModules = false;

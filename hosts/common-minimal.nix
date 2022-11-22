@@ -7,6 +7,12 @@ with lib; {
   # kernel args
   boot.kernelParams = [ "amd_iommu=on" "intel_iommu=on" ];
 
+  # fstrim
+  services.fstrim = {
+    enable = true;
+    interval = "daily";
+  };
+
   # zram swap
   zramSwap.enable = true;
 
@@ -55,6 +61,7 @@ with lib; {
 
   nixpkgs.config.allowUnfree = true;
   programs.gnupg.agent.enable = true;
+  services.journald.extraConfig = "Storage=volatile";
 
   # Hardened profile fixes/overrides/additions
   security = {

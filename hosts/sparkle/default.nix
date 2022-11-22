@@ -16,7 +16,6 @@
     };
     initrd = {
       availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-      kernelModules = [ "amdgpu" ];
     };
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [ config.boot.kernelPackages.rtl8821cu ];
@@ -45,7 +44,6 @@
       fsType = "ext4";
       options = [
         "noatime"
-        "discard"
       ];
     };
     "/boot" = {
@@ -53,7 +51,6 @@
       fsType = "vfat";
       options = [
         "noatime"
-        "discard"
       ];
     };
     "/media/ssd2" = {
@@ -61,7 +58,6 @@
       fsType = "ext4";
       options = [
         "noatime"
-        "discard"
       ];
     };
     "/media/hdd" = {
