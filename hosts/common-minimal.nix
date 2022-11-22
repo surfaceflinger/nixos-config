@@ -10,11 +10,13 @@ with lib; {
   # zram swap
   zramSwap.enable = true;
 
-  time.timeZone = mkDefault "Europe/Warsaw";
+  # tmpfs
+  boot.tmpOnTmpfs = true;
 
-  # Locale and keymap
+  # Regional
   i18n.defaultLocale = mkDefault "en_US.UTF-8";
   console.keyMap = mkDefault "pl";
+  time.timeZone = mkDefault "Europe/Warsaw";
 
   # Users
   security = {

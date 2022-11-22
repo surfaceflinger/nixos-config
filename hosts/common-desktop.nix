@@ -102,13 +102,11 @@
     gnomeExtensions.rounded-window-corners # Makes every window have rounded corners
     gnomeExtensions.user-themes # Custom shell themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
-    tela-icon-theme # Nice looking icon theme
 
     # Desktop software
     discord # IM for pedophiles
     gnome.gnome-terminal # GNOME terminal emulator that's a bit more advanced than GNOME Console
     google-chrome # Proprietary web browser from Google
-    onlyoffice-bin # Office suite highly compatible with MS Office formats
     pavucontrol # Best software for managing basic pipewire/pulseaudio settings
     qbittorrent # QT BitTorrent client
     quasselClient # IRC client
@@ -140,11 +138,6 @@
     wireshark
 
     # Development
-    clang_14
-    gitFull # Distributed version control
-    gnupg # To encrypt DMs on WHM
-    go
-    llvm_14
     sublime4 # Sophisticated text editor for code, markup and prose.
 
     # Misc
