@@ -1,12 +1,10 @@
-{ config
-, pkgs
+{ pkgs
 , modulesPath
 , lib
 , ...
 }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    (modulesPath + "/profiles/hardened.nix")
   ];
 
   # Bootloader/Kernel/Modules

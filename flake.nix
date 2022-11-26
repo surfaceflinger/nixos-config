@@ -13,26 +13,27 @@
     { self
     , nixpkgs
     , xkomhotshot
-    ,
     }:
       with nixpkgs; {
         nixosConfigurations = {
           sparkle = lib.nixosSystem {
-            # Desktop
+            # Desktop / Dell Optiplex 9020
             system = "x86_64-linux";
             modules = [
               ./hosts/sparkle
               ./hosts/common-minimal.nix
+              ./hosts/common-hardening.nix
               ./hosts/common-standard.nix
               ./hosts/common-desktop.nix
             ];
           };
           apricot = lib.nixosSystem {
-            # Laptop
+            # Laptop / HP Probook 6470b
             system = "x86_64-linux";
             modules = [
               ./hosts/apricot
               ./hosts/common-minimal.nix
+              ./hosts/common-hardening.nix
               ./hosts/common-standard.nix
               ./hosts/common-desktop.nix
             ];
@@ -43,6 +44,7 @@
             modules = [
               ./hosts/nekopon
               ./hosts/common-minimal.nix
+              ./hosts/common-hardening.nix
               ./hosts/common-standard.nix
               xkomhotshot.nixosModule
             ];

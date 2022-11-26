@@ -4,9 +4,6 @@
 , ...
 }:
 with lib; {
-  # kernel args
-  boot.kernelParams = [ "amd_iommu=on" "intel_iommu=on" ];
-
   # fstrim
   services.fstrim = {
     enable = true;
@@ -61,21 +58,6 @@ with lib; {
 
   programs.gnupg.agent.enable = true;
   services.journald.extraConfig = "Storage=volatile";
-
-  # Hardened profile fixes/overrides/additions
-  security = {
-    allowSimultaneousMultithreading = true;
-    pam.loginLimits = [
-      {
-        domain = "*";
-        item = "core";
-        type = "hard";
-        value = "0";
-      }
-    ];
-  };
-  systemd.coredump.enable = false;
-  environment.memoryAllocator.provider = "libc";
 
   # Limit generations
   boot.loader = {

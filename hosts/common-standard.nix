@@ -63,10 +63,4 @@
     set tabstospaces
     set autoindent
   '';
-
-  # Hardened profile fixes/overrides/additions
-  security = {
-    lockKernelModules = false;
-    unprivilegedUsernsClone = true;
-  };
 }
