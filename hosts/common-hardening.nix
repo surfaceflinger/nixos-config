@@ -1,6 +1,4 @@
-{ modulesPath
-, ...
-}: {
+{ modulesPath, ... }: {
   imports = [
     (modulesPath + "/profiles/hardened.nix")
   ];
@@ -18,22 +16,23 @@
       }
     ];
   };
+  systemd.coredump.enable = false;
 
   boot.kernel.sysctl = {
-    "kernel.printk" = "3 3 3 3";
     "dev.tty.ldisc_autoload" = "0";
-    "kernel.sysrq" = "4";
-    "net.ipv4.tcp_rfc1337" = "1";
-    "net.ipv6.conf.all.accept_ra" = "0";
-    "net.ipv6.default.accept_ra" = "0";
-    "net.ipv4.tcp_sack" = "0";
-    "net.ipv4.tcp_dsack" = "0";
-    "kernel.yama.ptrace_scope" = "2";
     "fs.protected_fifos" = "2";
     "fs.protected_regular" = "2";
-    "net.ipv4.tcp_timestamps" = "0";
-    "syskernel.core_pattern" = "|/bin/false";
     "fs.suid_dumpable" = "0";
+    "kernel.printk" = "3 3 3 3";
+    "kernel.sysrq" = "4";
+    "kernel.yama.ptrace_scope" = "2";
+    "net.ipv4.tcp_dsack" = "0";
+    "net.ipv4.tcp_rfc1337" = "1";
+    "net.ipv4.tcp_sack" = "0";
+    "net.ipv4.tcp_timestamps" = "0";
+    "net.ipv6.conf.all.accept_ra" = "0";
+    "net.ipv6.default.accept_ra" = "0";
+    "syskernel.core_pattern" = "|/bin/false";
     "vm.swappiness" = "1";
   };
 
@@ -81,8 +80,6 @@
     "thunderbolt"
     "firewire-core"
   ];
-
-  systemd.coredump.enable = false;
 
   environment.memoryAllocator.provider = "libc";
 }

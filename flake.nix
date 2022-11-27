@@ -13,6 +13,7 @@
     { self
     , nixpkgs
     , xkomhotshot
+    ,
     }:
       with nixpkgs; {
         nixosConfigurations = {

@@ -4,7 +4,7 @@
     (self: super: {
       gnome = super.gnome.overrideScope' (gself: gsuper: {
         mutter = gsuper.mutter.overrideAttrs (oldAttrs: {
-          patchFlags = ["-N" "-p1" "-F3"];
+          patchFlags = [ "-N" "-p1" "-F3" ];
           patches =
             oldAttrs.patches
             ++ [
