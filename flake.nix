@@ -25,6 +25,7 @@
               ./hosts/common-hardening.nix
               ./hosts/common-standard.nix
               ./hosts/common-desktop.nix
+              ./hosts/common-mutter-patches.nix
             ];
           };
           apricot = lib.nixosSystem {
