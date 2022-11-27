@@ -24,7 +24,7 @@
     permitRootLogin = "no";
     extraConfig = ''
       AllowAgentForwarding no
-      AllowUsers {{users}}
+      AllowGroups users
       LoginGraceTime 15s
       MaxAuthTries 2
       MaxStartups 4096
