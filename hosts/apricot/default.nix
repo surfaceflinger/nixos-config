@@ -52,8 +52,9 @@
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  # VAAPI
+  # GPU
   hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
+  environment.variables = { MESA_LOADER_DRIVER_OVERRIDE = "crocus"; };
 
   # Personal preference on how logind should handle lid switch.
   services.logind = {
