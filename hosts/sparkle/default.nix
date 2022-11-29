@@ -6,6 +6,7 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ./minidlna.nix
   ];
 
   # Bootloader/Kernel/Modules
@@ -65,17 +66,6 @@
       options = [
         "noatime"
       ];
-    };
-  };
-
-  # minidlna
-  services.minidlna = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      inotify = "yes";
-      media_dir = [ "V,/media/hdd/Torrent/DL" ];
-      friendly_name = config.networking.hostName;
     };
   };
 

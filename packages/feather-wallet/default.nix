@@ -1,60 +1,133 @@
-{ pkgs
+{ lib
 , stdenv
-, fetchzip
-, fetchurl
+, wrapQtAppsHook
 , makeDesktopItem
-, autoPatchelfHook
+, fetchFromGitHub
+, fetchgit
+, git
+, cmake
+, qttools
+, pkg-config
+, qtbase
+, qtwebsockets
+, qtsvg
+, miniupnpc
+, unbound
+, readline
+, boost
+, libunwind
+, libsodium
+, pcsclite
+, randomx
+, zeromq
+, libgcrypt
+, libgpg-error
+, hidapi
+, rapidjson
+, qrencode
+, zbar
+, expat
+, libzip
+, libusb1
+, protobuf
+, python3
 ,
 }:
 stdenv.mkDerivation rec {
-  name = "feather-wallet";
+  pname = "feather-wallet";
   version = "2.1.0";
 
-  src = fetchzip {
-    url = "https://featherwallet.org/files/releases/linux/feather-${version}-linux.zip";
-    sha256 = "sha256-BYi7R+FqgG8li3W6yuKENiqylkhMvZM4APpL+8nUrzI=";
-  };
-
-  iconFile = fetchurl {
-    url = "https://featherwallet.org/img/Feather-icon.png";
-    sha256 = "sha256-1FnTy2P8Ukpv1MOmgY/OHO4tbioNyf+F3mGkQTOiqyI=";
-  };
-
-  desktopItem = makeDesktopItem {
-    name = name;
-    desktopName = "Feather Wallet";
-    comment = "A free Monero desktop wallet";
-    icon = name;
-    exec = "${name} %F";
-    startupNotify = true;
-    startupWMClass = name;
-    categories = [ "Utility" ];
-    keywords = [ "feather" "wallet" "monero" ];
+  src = fetchgit {
+    url = "https://github.com/feather-wallet/feather.git";
+    rev = version;
+    sha256 = "eLRguzCHwF+GWqgObmhkg2v0eTlCjzx+qZaUnLWwg7M=";
+    fetchSubmodules = true;
+    leaveDotGit = true;
   };
 
   nativeBuildInputs = [
-    autoPatchelfHook
+    cmake
+    pkg-config
+    wrapQtAppsHook
+    (lib.getDev qttools)
   ];
 
-  buildInputs = with pkgs; [
-    eudev
-    glib
-    libxkbcommon
-    xorg.libX11
-    xorg.libxcb
-    xorg.xcbutilimage
-    xorg.xcbutilkeysyms
-    xorg.xcbutilrenderutil
-    xorg.xcbutilwm
-    zlib
+  buildInputs = [
+    qtbase
+    qtwebsockets
+    qtsvg
+    miniupnpc
+    unbound
+    readline
+    randomx
+    libgcrypt
+    libgpg-error
+    boost
+    libunwind
+    libsodium
+    pcsclite
+    zeromq
+    hidapi
+    rapidjson
+    qrencode
+    zbar
+    expat
+    libusb1
+    protobuf
+    libzip
+    git
   ];
 
-  dontBuild = true;
-  dontConfigure = true;
+  patches = [
+    ./config_fix.patch
+    ./install_fix.patch
+  ];
 
-  installPhase = ''
-    install -Dm755 ./feather-${version} $out/bin/${name}
-    install -Dm644 ${desktopItem}/share/applications/${name}.desktop $out/share/applications/${name}.desktop
-    install -Dm644 ${iconFile} $out/share/pixmaps/${name}.png
+  desktopItem = makeDesktopItem {
+    name = "feather-wallet";
+    exec = "feather";
+    icon = "feather-wallet";
+    desktopName = "Feather";
+    genericName = "Wallet";
+    categories = [ "Utility" ];
+  };
+
+  postInstall = ''
+    # install desktop entry
+    install -Dm644 -t $out/share/applications \
+      ${desktopItem}/share/applications/*
+    # install icons
+    for n in 32 48 64 96 128 256; do
+      size=$n"x"$n
+      install -Dm644 \
+        -t $out/share/icons/hicolor/$size/apps/feather-wallet.png \
+        $src/src/assets/images/appicons/$size.png
+    done;
   '';
+
+  cmakeFlags =
+    [
+      "-DCMAKE_BUILD_TYPE=Release"
+    ]
+    ++ (
+      if stdenv.hostPlatform.system == "x86_64-linux"
+      then [
+        "-DARCH=x86-64"
+        "-DBUILD_TAG=\"linux-x64\""
+      ]
+      else if stdenv.hostPlatform.system == "aarch64-linux"
+      then [
+        "-DARCH=armv8-a"
+        "-DBUILD_TAG=\"linux-armv8\""
+      ]
+      else throw "Architecture not supported"
+    );
+
+  meta = with lib; {
+    description = "A free Monero desktop wallet";
+    homepage = "https://featherwallet.org/";
+    license = licenses.bsd3;
+    platforms = [ "x86_64-linux" "aarch64-linux" ];
+    maintainers = with maintainers; [ neverupdate ];
+  };
 }

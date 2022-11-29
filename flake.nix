@@ -22,11 +22,10 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/sparkle
-              ./hosts/common-minimal.nix
-              ./hosts/common-hardening.nix
-              ./hosts/common-standard.nix
-              ./hosts/common-desktop.nix
-              ./hosts/common-mutter-patches.nix
+              ./modules/presets/desktop.nix
+              ./modules/user-nat.nix
+              ./modules/logitech.nix
+              ./modules/virtualization.nix
             ];
           };
           apricot = lib.nixosSystem {
@@ -34,10 +33,8 @@
             system = "x86_64-linux";
             modules = [
               ./hosts/apricot
-              ./hosts/common-minimal.nix
-              ./hosts/common-hardening.nix
-              ./hosts/common-standard.nix
-              ./hosts/common-desktop.nix
+              ./modules/presets/desktop.nix
+              ./modules/user-nat.nix
             ];
           };
           nekopon = lib.nixosSystem {
@@ -45,9 +42,8 @@
             system = "aarch64-linux";
             modules = [
               ./hosts/nekopon
-              ./hosts/common-minimal.nix
-              ./hosts/common-hardening.nix
-              ./hosts/common-standard.nix
+              ./modules/presets/server.nix
+              ./modules/user-nat.nix
               xkomhotshot.nixosModule
             ];
           };

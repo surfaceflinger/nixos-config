@@ -2,44 +2,6 @@
 , pkgs
 , ...
 }: {
-  # Networking
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-    trustedInterfaces = [ "tailscale0" ];
-    checkReversePath = "loose";
-  };
-  services.tailscale.enable = true;
-
-  # Users
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    kexAlgorithms = [ "sntrup761x25519-sha512@openssh.com" ];
-    ciphers = [ "chacha20-poly1305@openssh.com" ];
-    macs = [ "-*" ];
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
-    extraConfig = ''
-      AllowAgentForwarding no
-      AllowGroups users
-      LoginGraceTime 15s
-      MaxAuthTries 2
-      MaxStartups 4096
-      PerSourceMaxStartups 1
-      PrintMotd no
-      PubkeyAcceptedKeyTypes ssh-ed25519
-    '';
-    hostKeys = [
-      {
-        path = "/etc/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-    ];
-  };
-
   # Other software
   environment.systemPackages = with pkgs; [
     # Rice / UX
@@ -70,8 +32,7 @@
     usbutils # why, why isnt my pendrive working????? i have hardened profile btw
 
     # Development
-    gitFull # Distributed version control
-    gnupg # To encrypt DMs on WHM
+    git # Distributed version control
 
     # Networking
     bind # nslookup/dig

@@ -2,8 +2,7 @@
 , pkgs
 , lib
 , ...
-}:
-with lib; {
+}: {
   # fstrim
   services.fstrim = {
     enable = true;
@@ -17,11 +16,11 @@ with lib; {
   boot.tmpOnTmpfs = true;
 
   # Regional
-  i18n.defaultLocale = mkDefault "en_US.UTF-8";
-  console.keyMap = mkDefault "pl";
-  time.timeZone = mkDefault "Europe/Warsaw";
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+  console.keyMap = lib.mkDefault "pl";
+  time.timeZone = lib.mkDefault "Europe/Warsaw";
 
-  # Users
+  # doas
   security = {
     sudo.enable = false;
     doas = {
@@ -37,32 +36,21 @@ with lib; {
     };
   };
 
-  programs.zsh.enable = true;
-
-  users.users.nat = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBeWbH2L99MoMuT2a1nzmpI86VBht/io2TBraa2Pe98F nat@sparkle"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANRmkBgx14Oa1CKUQfS76V0ixEJzKhHlM8XF7qqiapa nat@apricot"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqJ6aKTV33D1iZcuEw86lQ6QxmcfqIEcpBs4Da7GjI2 hanoip"
-    ];
-  };
-
   # Other software
   environment.systemPackages = with pkgs; [
-    # Wrappers
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
+    gnupg
   ];
-
-  programs.gnupg.agent.enable = true;
+  programs = {
+    gnupg.agent.enable = true;
+    zsh.enable = true;
+  };
   services.journald.extraConfig = "Storage=volatile";
 
-  # Limit generations
+  # Limit amount of generations
   boot.loader = {
-    systemd-boot.configurationLimit = mkDefault 5;
-    grub.configurationLimit = mkDefault 5;
+    systemd-boot.configurationLimit = lib.mkDefault 5;
+    grub.configurationLimit = lib.mkDefault 5;
   };
 
   # Nix
@@ -78,7 +66,7 @@ with lib; {
 
   system = {
     autoUpgrade = {
-      enable = mkDefault true;
+      enable = lib.mkDefault true;
       flake = "github:surfaceflinger/nixos-config";
     };
     stateVersion = "22.11";

@@ -6,7 +6,6 @@
   security = {
     allowSimultaneousMultithreading = true;
     lockKernelModules = false;
-    unprivilegedUsernsClone = true;
     pam.loginLimits = [
       {
         domain = "*";
