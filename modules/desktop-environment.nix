@@ -80,5 +80,5 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.flatpak.enable = true;
-  security.allowUserNamespaces = true;
+  security.unprivilegedUsernsClone = true;
 }

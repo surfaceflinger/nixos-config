@@ -2,7 +2,6 @@
 , stdenv
 , wrapQtAppsHook
 , makeDesktopItem
-, fetchFromGitHub
 , fetchgit
 , git
 , cmake
@@ -30,8 +29,6 @@
 , libzip
 , libusb1
 , protobuf
-, python3
-,
 }:
 stdenv.mkDerivation rec {
   pname = "feather-wallet";
