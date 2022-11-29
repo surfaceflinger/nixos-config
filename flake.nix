@@ -26,6 +26,8 @@
               ./modules/user-nat.nix
               ./modules/logitech.nix
               ./modules/virtualization.nix
+              ./modules/android.nix
+              ./modules/anime4k.nix
             ];
           };
           apricot = lib.nixosSystem {

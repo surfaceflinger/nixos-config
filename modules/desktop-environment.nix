@@ -81,4 +81,6 @@
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.flatpak.enable = true;
   security.unprivilegedUsernsClone = true;
+
+  programs.gamemode.enable = true;
 }
