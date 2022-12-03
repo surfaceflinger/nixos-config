@@ -50,9 +50,6 @@
     gnomeExtensions.user-themes # Custom shell themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
 
-    # Desktop software
-    gnome.gnome-terminal # GNOME terminal emulator that's a bit more advanced than GNOME Console
-
     # Media
     ffmpeg
 
@@ -63,10 +60,13 @@
 
     # Development
     sublime4 # Sophisticated text editor for code, markup and prose.
+    vscodium
 
     # Misc
     scrcpy
   ];
+
+  programs.gnome-terminal.enable = true;
 
   fonts = {
     fonts = with pkgs; [

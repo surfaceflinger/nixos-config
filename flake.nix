@@ -13,7 +13,6 @@
     { self
     , nixpkgs
     , xkomhotshot
-    ,
     }:
       with nixpkgs; {
         nixosConfigurations = {
@@ -23,6 +22,7 @@
             modules = [
               ./hosts/sparkle
               ./modules/presets/desktop.nix
+              ./modules/patches-gnome.nix
               ./modules/user-nat.nix
               ./modules/logitech.nix
               ./modules/virtualization.nix

@@ -10,7 +10,6 @@
     ../networking-desktop.nix
     ../openssh.nix
     ../overlay.nix
-    ../patches-gnome.nix
     ../printing.nix
     ../sound.nix
     ../tools-desktop.nix

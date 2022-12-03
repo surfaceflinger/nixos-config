@@ -9,10 +9,6 @@
             oldAttrs.patches
             ++ [
               ../packages/patches/mutter/vrr.patch
-              ../packages/patches/mutter/mr1880.patch
-              ../packages/patches/mutter/mr2671.patch
-              ../packages/patches/mutter/mr2694.patch
-              ../packages/patches/mutter/mr2720.patch
             ];
         });
         gnome-control-center = gsuper.gnome-control-center.overrideAttrs (oldAttrs: {
