@@ -76,20 +76,18 @@
     hostName = "sparkle";
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  system.autoUpgrade.enable = false;
+  services.xserver.displayManager.gdm.autoSuspend = false;
+
+  environment.systemPackages = with pkgs; [
+    pcsx2 # ps2 emu
+  ];
 
   # MERKUSYS wifi dongle workaround
   services.udev.extraRules = ''
     ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -K -v 0bda -p 1a2b"
   '';
 
-  # AMD Overclocking
+  # AMD GPU Overclocking
   boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
-
-  # Disable autoupgrade
-  system.autoUpgrade.enable = false;
-
-  # Extra packages
-  environment.systemPackages = with pkgs; [
-    pcsx2 # ps2 emu
-  ];
 }
