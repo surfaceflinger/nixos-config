@@ -6,7 +6,7 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ./minidlna.nix
+    ./media.nix
   ];
 
   # Bootloader/Kernel/Modules

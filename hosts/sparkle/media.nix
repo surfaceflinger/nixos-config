@@ -8,4 +8,13 @@
       friendly_name = config.networking.hostName;
     };
   };
+
+  services.darkhttpd = {
+    enable = true;
+    port = 9090;
+    address = "all";
+    rootDir = "/media/hdd/Torrent";
+  };
+
+  networking.firewall.allowedUDPPorts = [ config.services.darkhttpd.port ];
 }
