@@ -16,5 +16,5 @@
     rootDir = "/media/hdd/Torrent";
   };
 
-  networking.firewall.allowedUDPPorts = [ config.services.darkhttpd.port ];
+  networking.firewall.allowedTCPPorts = [ config.services.darkhttpd.port ];
 }
