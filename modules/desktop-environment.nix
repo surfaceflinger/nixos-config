@@ -42,6 +42,7 @@
     # Rice / UX
     adw-gtk3 # libadwaita look for gtk3 software
     gnome.gnome-tweaks # App to change some hidden GNOME settings
+    gnome.gnome-session
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
     gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
     gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
@@ -60,7 +61,6 @@
 
     # Development
     sublime4 # Sophisticated text editor for code, markup and prose.
-    vscodium
 
     # Misc
     scrcpy
@@ -80,7 +80,6 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.flatpak.enable = true;
-  security.unprivilegedUsernsClone = true;
-
   programs.gamemode.enable = true;
+  security.unprivilegedUsernsClone = true;
 }
