@@ -4,6 +4,7 @@
       # Packages
       anime4k = super.callPackage ../packages/anime4k { };
       apple-emoji-linux = super.callPackage ../packages/apple-emoji-linux { };
+      burpsuite = super.callPackage ../packages/burpsuite { };
       feather-wallet = super.qt6.callPackage ../packages/feather-wallet { };
       # Overrides
       discord = super.discord.override { withOpenASAR = true; };

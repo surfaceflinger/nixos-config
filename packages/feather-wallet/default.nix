@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://github.com/feather-wallet/feather.git";
     rev = version;
-    sha256 = "eLRguzCHwF+GWqgObmhkg2v0eTlCjzx+qZaUnLWwg7M=";
+    sha256 = "kVvh+MlMGX5m0KwzY05VpP10Udg6mRoyHmvhrf8Wxp0=";
     fetchSubmodules = true;
     leaveDotGit = true;
   };
