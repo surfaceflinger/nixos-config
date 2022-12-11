@@ -1,5 +1,7 @@
 { pkgs, ... }: {
   users.users.nat = {
+    uid = 1111;
+    initialHashedPassword = "$6$lR2ORA5b3eQUIqWN$W0RFJ7/5jWfajKZl2CfSwp5/BmUIzuS5OnRvksaUWmN575fubdRMybKDAFKKDnh67k6z39qjNlMLiI/drslNv1";
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "networkmanager" "adbusers" ];
     shell = pkgs.zsh;
