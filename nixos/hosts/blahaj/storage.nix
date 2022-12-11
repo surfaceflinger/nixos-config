@@ -34,4 +34,9 @@
     device = "/dev/disk/by-uuid/4B56-046D";
     fsType = "vfat";
   };
+
+  systemd.tmpfiles.rules = [
+    "d /home/nat 0700 nat users - -"
+    "d /vol/Games 0700 nat users - -"
+  ];
 }

@@ -9,8 +9,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
 
     inputs.impermanence.nixosModule
-    ./zfs.nix
     ../../modules/zfs.nix
+    ./storage.nix
 
     ../../presets/desktop.nix
     ../../modules/user-nat.nix
