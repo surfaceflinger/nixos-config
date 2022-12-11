@@ -6,6 +6,9 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    ../../presets/desktop.nix
+    ../../modules/user-nat.nix
   ];
 
   # Bootloader/Kernel/Modules
@@ -20,7 +23,7 @@
 
   # LUKS
   boot.initrd.luks.devices = {
-    "apricot" = {
+    "OS" = {
       device = "/dev/disk/by-uuid/b148d5cd-93d5-4466-b186-974674fc6e0a";
       allowDiscards = true;
     };
@@ -48,7 +51,7 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
   networking = {
     useDHCP = lib.mkDefault false;
-    hostName = "apricot";
+    hostName = "djungelskog";
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 

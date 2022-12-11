@@ -6,6 +6,14 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    ../../presets/desktop.nix
+    ../../modules/user-nat.nix
+    ../../modules/logitech.nix
+    ../../modules/virtualization.nix
+    ../../modules/android.nix
+    ../../modules/anime4k.nix
+
     ./media.nix
   ];
 
@@ -24,7 +32,7 @@
 
   # LUKS
   boot.initrd.luks.devices = {
-    "sparkle" = {
+    "OS" = {
       device = "/dev/disk/by-uuid/d9907dfb-a0a3-4717-836e-da15d8e95eb7";
       allowDiscards = true;
     };
@@ -73,7 +81,7 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   networking = {
     useDHCP = lib.mkDefault false;
-    hostName = "sparkle";
+    hostName = "blahaj";
   };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   system.autoUpgrade.enable = false;

@@ -1,6 +1,7 @@
 { config
 , pkgs
 , lib
+, outputs
 , ...
 }: {
   # fstrim
@@ -72,5 +73,11 @@
     stateVersion = "22.11";
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.modifications
+      outputs.overlays.additions
+    ];
+    config.allowUnfree = true;
+  };
 }

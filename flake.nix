@@ -13,42 +13,32 @@
     { self
     , nixpkgs
     , xkomhotshot
-    }:
-      with nixpkgs; {
-        nixosConfigurations = {
-          sparkle = lib.nixosSystem {
-            # Desktop / Dell Optiplex 9020
-            system = "x86_64-linux";
-            modules = [
-              ./hosts/sparkle
-              ./modules/presets/desktop.nix
-              ./modules/patches-gnome.nix
-              ./modules/user-nat.nix
-              ./modules/logitech.nix
-              ./modules/virtualization.nix
-              ./modules/android.nix
-              ./modules/anime4k.nix
-            ];
-          };
-          apricot = lib.nixosSystem {
-            # Laptop / HP Probook 6470b
-            system = "x86_64-linux";
-            modules = [
-              ./hosts/apricot
-              ./modules/presets/desktop.nix
-              ./modules/user-nat.nix
-            ];
-          };
-          nekopon = lib.nixosSystem {
-            # VPS @ Oracle Cloud
-            system = "aarch64-linux";
-            modules = [
-              ./hosts/nekopon
-              ./modules/presets/server.nix
-              ./modules/user-nat.nix
-              xkomhotshot.nixosModule
-            ];
-          };
+    } @ inputs:
+    let
+      inherit (self) outputs;
+    in
+    {
+      overlays = import ./overlays;
+
+      nixosConfigurations = {
+        blahaj = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          # Desktop / Dell Optiplex 9020
+          system = "x86_64-linux";
+          modules = [ ./nixos/hosts/blahaj ];
+        };
+        djungelskog = nixpkgs.lib.nixosSystem {
+         specialArgs = { inherit inputs outputs; };
+          # Laptop / HP Probook 6470b
+          system = "x86_64-linux";
+          modules = [ ./nixos/hosts/djungelskog ];
+        };
+        blavingad = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+          # VPS @ Oracle Cloud
+          system = "aarch64-linux";
+          modules = [ ./nixos/hosts/blavingad ];
         };
       };
+    };
 }

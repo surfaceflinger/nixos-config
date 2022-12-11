@@ -1,9 +1,15 @@
 { pkgs
+, inputs
 , modulesPath
 , ...
 }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+
+    ../../presets/server.nix
+    ../../modules/user-nat.nix
+
+    inputs.xkomhotshot.nixosModule
     ./adguard.nix
     ./quassel.nix
   ];
@@ -37,7 +43,7 @@
   };
 
   # Networking
-  networking.hostName = "nekopon";
+  networking.hostName = "blavingad";
 
   # Other software
   environment.systemPackages = with pkgs; [
