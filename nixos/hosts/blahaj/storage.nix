@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   environment.persistence."/persist" = {
     hideMounts = true;
     files = [
@@ -17,7 +17,7 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=2G" ];
+    options = ["defaults" "size=2G"];
   };
 
   fileSystems."/nix" = {

@@ -1,10 +1,10 @@
-{ pkgs
-, stdenv
-, fetchzip
-, fetchurl
-, makeDesktopItem
-, autoPatchelfHook
-,
+{
+  pkgs,
+  stdenv,
+  fetchzip,
+  fetchurl,
+  makeDesktopItem,
+  autoPatchelfHook,
 }:
 stdenv.mkDerivation rec {
   name = "feather-wallet";
@@ -28,8 +28,8 @@ stdenv.mkDerivation rec {
     exec = "${name} %F";
     startupNotify = true;
     startupWMClass = name;
-    categories = [ "Utility" ];
-    keywords = [ "feather" "wallet" "monero" ];
+    categories = ["Utility"];
+    keywords = ["feather" "wallet" "monero"];
   };
 
   nativeBuildInputs = [

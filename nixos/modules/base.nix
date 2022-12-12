@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, lib
-, outputs
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  outputs,
+  ...
 }: {
   # fstrim
   services.fstrim = {
@@ -28,8 +29,8 @@
       enable = true;
       extraRules = [
         {
-          users = [ "root" ];
-          groups = [ "wheel" ];
+          users = ["root"];
+          groups = ["wheel"];
           keepEnv = true;
           persist = true;
         }
@@ -62,7 +63,11 @@
       options = "--delete-older-than 7d";
     };
     settings.auto-optimise-store = true;
-    extraOptions = "experimental-features = nix-command flakes";
+    extraOptions = ''
+      experimental-features = nix-command flakes auto-allocate-uids cgroups
+      auto-allocate-uids = true
+      use-cgroups = true
+    '';
   };
 
   system = {

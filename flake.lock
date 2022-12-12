@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1665860774,
-        "narHash": "sha256-u5XtqYWMwqCsBoROg6leZOG5Ns+wddMgFdISTf3s94I=",
+        "lastModified": 1670885585,
+        "narHash": "sha256-xQl3ddcn169RAOtwoOsU/3QQD5GmeJybR8tizuzYqSw=",
         "owner": "surfaceflinger",
         "repo": "xkomhotshot",
-        "rev": "9547dabdf8f77334cda3f80e7d229e48f44fa79f",
+        "rev": "0da2306552fb6e626a476b2212f239170a134665",
         "type": "github"
       },
       "original": {

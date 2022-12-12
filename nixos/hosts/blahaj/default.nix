@@ -1,9 +1,10 @@
-{ config
-, inputs
-, lib
-, pkgs
-, modulesPath
-, ...
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -29,11 +30,11 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-      kernelModules = [ "amdgpu" ];
+      availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+      kernelModules = ["amdgpu"];
     };
-    extraModulePackages = [ config.boot.kernelPackages.rtl8821cu ];
-    kernelModules = [ "kvm-intel" "8821cu" ];
+    extraModulePackages = [config.boot.kernelPackages.rtl8821cu];
+    kernelModules = ["kvm-intel" "8821cu"];
   };
 
   # Misc
@@ -56,5 +57,5 @@
   '';
 
   # AMD GPU Overclocking
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+  boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
 }

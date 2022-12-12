@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ../modules/base.nix
     ../modules/hardening.nix

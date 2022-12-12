@@ -1,6 +1,6 @@
-{ stdenv
-, fetchzip
-,
+{
+  stdenv,
+  fetchzip,
 }:
 stdenv.mkDerivation rec {
   pname = "Anime4k";

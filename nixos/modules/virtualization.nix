@@ -1,7 +1,15 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     virt-manager
-    spice-gtk
   ];
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    spiceUSBRedirection.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        runAsRoot = false;
+        ovmf.enable = true;
+      };
+    };
+  };
 }
