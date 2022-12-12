@@ -46,7 +46,6 @@
     "amd_iommu=on"
     "intel_iommu=on"
     "quiet"
-    "loglevel=0"
   ];
 
   boot.blacklistedKernelModules = [
@@ -80,5 +79,6 @@
     "firewire-core"
   ];
 
+  boot.consoleLogLevel = 0;
   environment.memoryAllocator.provider = "libc";
 }

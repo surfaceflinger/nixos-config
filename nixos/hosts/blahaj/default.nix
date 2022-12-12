@@ -30,9 +30,10 @@
     };
     initrd = {
       availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+      kernelModules = [ "amdgpu" ];
     };
     extraModulePackages = [ config.boot.kernelPackages.rtl8821cu ];
-    kernelModules = [ "kvm-intel" "8821cu" "amdgpu" ];
+    kernelModules = [ "kvm-intel" "8821cu" ];
   };
 
   # Misc

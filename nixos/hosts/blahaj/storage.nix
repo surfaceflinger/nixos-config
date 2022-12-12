@@ -8,6 +8,7 @@
     ];
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/var/cache/minidlna"
     ];
   };
 
@@ -33,6 +34,13 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/4B56-046D";
     fsType = "vfat";
+  };
+
+  # Add secondary HDD as neededForBoot so it gets activated in Stage 1.
+  fileSystems."/vol/ikea/Other" = {
+    device = "ikea/Other";
+    fsType = "zfs";
+    neededForBoot = true;
   };
 
   systemd.tmpfiles.rules = [

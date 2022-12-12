@@ -3,7 +3,7 @@
     electrum
     electrum-ltc
     feather-wallet
-    #ledger-live-desktop
+    ledger-live-desktop
   ];
 
   hardware.ledger.enable = true;
