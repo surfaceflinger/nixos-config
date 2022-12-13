@@ -44,7 +44,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /home/nat 0700 nat users - -"
     "d /vol/Games 0700 nat users - -"
   ];
 }
