@@ -11,4 +11,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqJ6aKTV33D1iZcuEw86lQ6QxmcfqIEcpBs4Da7GjI2 hanoip"
     ];
   };
+
+  systemd.tmpfiles.rules = ["d /home/nat 0700 nat users - -"];
 }

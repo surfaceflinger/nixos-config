@@ -36,7 +36,7 @@
     fsType = "vfat";
   };
 
-  # Add secondary HDD as neededForBoot so it gets activated in Stage 1.
+  # Add some dataset from secondary HDD as neededForBoot so the entire pool gets activated in Stage 1.
   fileSystems."/vol/ikea/Other" = {
     device = "ikea/Other";
     fsType = "zfs";

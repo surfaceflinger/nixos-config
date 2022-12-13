@@ -40,8 +40,6 @@
     "vsyscall=none"
     "debugfs=off"
     "oops=panic"
-    "module.sig_enforce=0"
-    "lockdown=confidentiality"
     "efi=disable_early_pci_dma"
     "amd_iommu=on"
     "intel_iommu=on"
