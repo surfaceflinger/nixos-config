@@ -20,6 +20,8 @@
     unrar
     unzip
     wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
+    binwalk
+    file
 
     # System utilities
     config.boot.kernelPackages.cpupower # Manage cpu governor and few other cool things

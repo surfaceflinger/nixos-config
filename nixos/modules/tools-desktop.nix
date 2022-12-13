@@ -4,6 +4,7 @@
     qbittorrent
     quasselClient
     tdesktop
+    xfce.mousepad
 
     # Media
     krita

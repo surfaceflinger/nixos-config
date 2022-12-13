@@ -26,16 +26,16 @@ zpool create -f \
 ## Create datasets which are going to persist directories.
 
 ```
-zfs create -o canmount=off -o mountpoint=none       blahaj/NixOS
-zfs create -o canmount=off -o mountpoint=/etc       blahaj/NixOS/etc
-zfs create -o canmount=on                           blahaj/NixOS/etc/nixos
-zfs create -o canmount=on  -o mountpoint=/home      blahaj/NixOS/home
-zfs create -o canmount=on  -o mountpoint=/nix       blahaj/NixOS/nix
-zfs create -o canmount=on  -o mountpoint=/persist   blahaj/NixOS/persist
-zfs create -o canmount=off -o mountpoint=/var       blahaj/NixOS/var
-zfs create -o canmount=on                           blahaj/NixOS/var/lib
-zfs create -o canmount=on                           blahaj/NixOS/var/log
-zfs create -o canmount=on  -o mountpoint=/vol/Games blahaj/Games
+zfs create -o canmount=off -o mountpoint=/ blahaj/NixOS
+zfs create -o canmount=off                 blahaj/NixOS/etc
+zfs create -o canmount=on                  blahaj/NixOS/etc/nixos
+zfs create -o canmount=on                  blahaj/NixOS/home
+zfs create -o canmount=on                  blahaj/NixOS/nix
+zfs create -o canmount=on                  blahaj/NixOS/persist
+zfs create -o canmount=off                 blahaj/NixOS/var
+zfs create -o canmount=on                  blahaj/NixOS/var/lib
+zfs create -o canmount=on                  blahaj/NixOS/var/log
+zfs create -o canmount=on                  blahaj/NixOS/vol/Games
 ```
 
 ## Permissions
