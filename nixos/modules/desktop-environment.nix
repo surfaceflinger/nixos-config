@@ -40,7 +40,6 @@
     (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
 
     # Rice / UX
-    adw-gtk3 # libadwaita look for gtk3 software
     gnome.gnome-tweaks # App to change some hidden GNOME settings
     gnome.gnome-session
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
@@ -76,6 +75,11 @@
       noto-fonts-cjk
     ];
     fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
+  };
+
+  qt5 = {
+    enable = true;
+    platformTheme = "qt5ct";
   };
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];

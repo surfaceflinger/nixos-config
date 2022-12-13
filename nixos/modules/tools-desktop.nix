@@ -15,6 +15,6 @@
     yt-dlp
 
     # Gaming
-    prismlauncher
+    prismlauncher-qt5
   ];
 }
