@@ -55,6 +55,26 @@
     grub.configurationLimit = lib.mkDefault 5;
   };
 
+  # Disable coredumps
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      item = "core";
+      type = "hard";
+      value = "0";
+    }
+  ];
+  systemd.coredump.enable = false;
+
+  # quiet kernel + iommu
+  boot.kernelParams = [
+    "efi=disable_early_pci_dma"
+    "amd_iommu=on"
+    "intel_iommu=on"
+    "quiet"
+  ];
+  boot.consoleLogLevel = 0;
+
   # Nix
   nix = {
     gc = {

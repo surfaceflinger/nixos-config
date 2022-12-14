@@ -5,6 +5,7 @@
     quasselClient
     tdesktop
     xfce.mousepad
+    gnome-feeds
 
     # Media
     krita

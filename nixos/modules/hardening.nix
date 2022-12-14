@@ -6,16 +6,7 @@
   security = {
     allowSimultaneousMultithreading = true;
     lockKernelModules = false;
-    pam.loginLimits = [
-      {
-        domain = "*";
-        item = "core";
-        type = "hard";
-        value = "0";
-      }
-    ];
   };
-  systemd.coredump.enable = false;
 
   boot.kernel.sysctl = {
     "dev.tty.ldisc_autoload" = "0";
@@ -40,10 +31,6 @@
     "vsyscall=none"
     "debugfs=off"
     "oops=panic"
-    "efi=disable_early_pci_dma"
-    "amd_iommu=on"
-    "intel_iommu=on"
-    "quiet"
   ];
 
   boot.blacklistedKernelModules = [
@@ -77,6 +64,5 @@
     "firewire-core"
   ];
 
-  boot.consoleLogLevel = 0;
   environment.memoryAllocator.provider = "libc";
 }
