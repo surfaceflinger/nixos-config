@@ -7,12 +7,19 @@
   ...
 }: {
   imports = [
+    # Hardware
     (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.nixos-hardware.nixosModules.common-pc
+    inputs.nixos-hardware.nixosModules.common-cpu-intel-cpu-only
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
 
+    # Storage
     inputs.impermanence.nixosModule
     ../../modules/zfs.nix
     ./storage.nix
 
+    # Userland
     ../../presets/desktop.nix
     ../../modules/user-nat.nix
     ../../modules/logitech.nix
@@ -20,6 +27,7 @@
     ../../modules/android.nix
     ../../modules/anime4k.nix
 
+    # Device specific
     ./media.nix
   ];
 
@@ -29,10 +37,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd = {
-      availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-      kernelModules = ["amdgpu"];
-    };
+    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
     extraModulePackages = [config.boot.kernelPackages.rtl8821cu];
     kernelModules = ["kvm-intel" "8821cu"];
   };
@@ -43,7 +48,6 @@
     useDHCP = lib.mkDefault false;
     hostName = "blahaj";
   };
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   system.autoUpgrade.enable = false;
   services.xserver.displayManager.gdm.autoSuspend = false;
 
@@ -55,7 +59,4 @@
   services.udev.extraRules = ''
     ATTR{idVendor}=="0bda", ATTR{idProduct}=="1a2b", RUN+="${pkgs.usb-modeswitch}/bin/usb_modeswitch -K -v 0bda -p 1a2b"
   '';
-
-  # AMD GPU Overclocking
-  boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
 }

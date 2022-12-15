@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
     xkomhotshot = {
       url = "github:surfaceflinger/xkomhotshot";
@@ -13,6 +14,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixos-hardware,
     impermanence,
     xkomhotshot,
   } @ inputs: let

@@ -7,12 +7,18 @@
   ...
 }: {
   imports = [
+    # Hardware
     (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
 
+    # Storage
     inputs.impermanence.nixosModule
     ../../modules/zfs.nix
     ./storage.nix
 
+    # Userland
     ../../presets/desktop.nix
     ../../modules/user-nat.nix
   ];
@@ -33,10 +39,8 @@
     useDHCP = lib.mkDefault false;
     hostName = "djungelskog";
   };
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # GPU
-  hardware.opengl.extraPackages = with pkgs; [vaapiIntel];
   environment.variables = {MESA_LOADER_DRIVER_OVERRIDE = "crocus";};
 
   # Personal preference on how logind should handle lid switch.

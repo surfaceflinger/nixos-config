@@ -5,12 +5,6 @@
   outputs,
   ...
 }: {
-  # fstrim
-  services.fstrim = {
-    enable = true;
-    interval = "daily";
-  };
-
   # zram swap
   zramSwap.enable = true;
 
