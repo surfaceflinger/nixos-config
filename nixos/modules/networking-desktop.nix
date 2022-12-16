@@ -3,7 +3,13 @@
   pkgs,
   ...
 }: {
-  networking.networkmanager.enable = true;
+  imports = [./networking-base.nix];
+
+  networking = {
+    useDHCP = false;
+    networkmanager.enable = true;
+  };
+
   services.avahi = {
     enable = true;
     publish = {

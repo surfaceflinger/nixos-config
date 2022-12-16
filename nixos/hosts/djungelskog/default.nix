@@ -19,7 +19,7 @@
     ./storage.nix
 
     # Userland
-    ../../presets/desktop.nix
+    ../../presets/laptop.nix
     ../../modules/user-nat.nix
   ];
 
@@ -34,19 +34,8 @@
   };
 
   # Misc
-  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
-  networking = {
-    useDHCP = lib.mkDefault false;
-    hostName = "djungelskog";
-  };
+  networking.hostName = "djungelskog";
 
   # GPU
   environment.variables = {MESA_LOADER_DRIVER_OVERRIDE = "crocus";};
-
-  # Personal preference on how logind should handle lid switch.
-  services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "lock";
-  };
 }

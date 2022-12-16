@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  imports = [./tools-standard.nix];
+
   environment.systemPackages = with pkgs; [
     # Desktop software
     qbittorrent

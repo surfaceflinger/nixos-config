@@ -43,11 +43,7 @@
   };
 
   # Misc
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  networking = {
-    useDHCP = lib.mkDefault false;
-    hostName = "blahaj";
-  };
+  networking.hostName = "blahaj";
   system.autoUpgrade.enable = false;
   services.xserver.displayManager.gdm.autoSuspend = false;
 
