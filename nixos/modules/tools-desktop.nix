@@ -7,7 +7,7 @@
     quasselClient
     tdesktop
     xfce.mousepad
-    gnome-feeds
+    newsboat
 
     # Media
     krita
