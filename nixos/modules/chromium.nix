@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    google-chrome
+    chromium
   ];
 
   programs.chromium = {
@@ -20,6 +20,7 @@
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock for YouTube (2)
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden (3)
       "omkfmpieigblcllmkgbflkikinpkodlk" # enhanced-h264ify (2)
+      "fnaicdffflnofjppbagibeoednhnbjhg" # floccus (2)
     ];
   };
 }
