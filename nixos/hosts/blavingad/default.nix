@@ -5,8 +5,14 @@
   ...
 }: {
   imports = [
+    # Hardware
     (modulesPath + "/profiles/qemu-guest.nix")
 
+    # Storage
+    ../../modules/zfs.nix
+    ./storage.nix
+
+    # Userland
     ../../presets/server.nix
     ../../modules/user-nat.nix
 
