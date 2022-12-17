@@ -58,9 +58,6 @@
     libva-utils # Check if VAAPI broke again
     radeontop # View your AMD GPU utilization
 
-    # Development
-    sublime4 # Sophisticated text editor for code, markup and prose.
-
     # Misc
     scrcpy
   ];
@@ -82,6 +79,7 @@
     platformTheme = "qt5ct";
   };
 
+  services.power-profiles-daemon.enable = false;
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   services.flatpak.enable = true;
   programs.gamemode.enable = true;
