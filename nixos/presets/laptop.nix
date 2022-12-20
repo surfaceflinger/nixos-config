@@ -4,6 +4,7 @@
   ];
 
   powerManagement.cpuFreqGovernor = "schedutil";
+  services.thermald.enable = true;
 
   # Personal preference on how logind should handle lid switch.
   services.logind = {
