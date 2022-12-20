@@ -31,7 +31,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/AB77-6D53";
-    fsType = "vfat";
+    device = "/dev/disk/by-uuid/1232bbd5-a84c-4ba5-83f1-0358658ef4c8";
+    fsType = "ext4";
   };
 }
