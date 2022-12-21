@@ -15,10 +15,12 @@
     # Userland
     ../../presets/server.nix
     ../../modules/user-nat.nix
+    ../../modules/nginx.nix
 
     inputs.xkomhotshot.nixosModule
     ./adguard.nix
     ./quassel.nix
+    ./freshrss.nix
   ];
 
   # Bootloader/Kernel/Modules
