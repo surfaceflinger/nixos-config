@@ -78,9 +78,7 @@
     };
     settings.auto-optimise-store = true;
     extraOptions = ''
-      experimental-features = nix-command flakes auto-allocate-uids cgroups
-      auto-allocate-uids = true
-      use-cgroups = true
+      experimental-features = nix-command flakes
     '';
   };
 

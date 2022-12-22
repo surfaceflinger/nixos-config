@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   services.freshrss = {
     enable = true;
     virtualHost = "freshrss";

@@ -31,6 +31,7 @@
       gnome-software
       gnome-system-monitor
       simple-scan
+      totem
       yelp
     ]);
 
@@ -56,10 +57,6 @@
     # System utilities
     glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
     libva-utils # Check if VAAPI broke again
-    radeontop # View your AMD GPU utilization
-
-    # Misc
-    scrcpy
   ];
 
   programs.gnome-terminal.enable = true;

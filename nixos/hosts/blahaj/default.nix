@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   modulesPath,
   ...
@@ -46,10 +45,6 @@
   networking.hostName = "blahaj";
   system.autoUpgrade.enable = false;
   services.xserver.displayManager.gdm.autoSuspend = false;
-
-  environment.systemPackages = with pkgs; [
-    pcsx2 # ps2 emu
-  ];
 
   # MERKUSYS wifi dongle workaround
   services.udev.extraRules = ''
