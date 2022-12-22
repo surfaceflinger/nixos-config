@@ -47,7 +47,6 @@
     gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
     gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
     gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
-    gnomeExtensions.rounded-window-corners # Makes every window have rounded corners
     gnomeExtensions.user-themes # Custom shell themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
 
