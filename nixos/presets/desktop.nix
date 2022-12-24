@@ -15,7 +15,4 @@
     ../modules/sound.nix
     ../modules/tools-desktop.nix
   ];
-
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

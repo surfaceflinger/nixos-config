@@ -6,7 +6,11 @@
   ...
 }: {
   # zram swap
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+  };
+  boot.kernel.sysctl."vm.swappiness" = lib.mkDefault "10";
 
   # tmpfs
   boot.tmpOnTmpfs = true;
@@ -60,14 +64,19 @@
   ];
   systemd.coredump.enable = false;
 
-  # quiet kernel + iommu
+  # kernel tuning
   boot.kernelParams = [
+    "intel_pstate=disable"
     "efi=disable_early_pci_dma"
     "amd_iommu=on"
     "intel_iommu=on"
     "quiet"
   ];
   boot.consoleLogLevel = 0;
+
+  # better oom handling
+  systemd.oomd.enable = false;
+  services.earlyoom.enable = true;
 
   # Nix
   nix = {
