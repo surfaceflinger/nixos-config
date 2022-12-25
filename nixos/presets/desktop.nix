@@ -15,4 +15,6 @@
     ../modules/sound.nix
     ../modules/tools-desktop.nix
   ];
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
 }

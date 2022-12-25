@@ -66,7 +66,6 @@
 
   # kernel tuning
   boot.kernelParams = [
-    "intel_pstate=disable"
     "efi=disable_early_pci_dma"
     "amd_iommu=on"
     "intel_iommu=on"

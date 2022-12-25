@@ -35,4 +35,7 @@
 
   # GPU
   environment.variables = {MESA_LOADER_DRIVER_OVERRIDE = "crocus";};
+
+  # thinkpad_acpi doesn't load on coreboot
+  boot.extraModprobeConfig = "options thinkpad_acpi force_load=1 fan_control=1";
 }
