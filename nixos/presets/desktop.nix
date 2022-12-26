@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   imports = [
     ../modules/base.nix
     ../modules/chromium.nix
