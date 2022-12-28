@@ -37,18 +37,16 @@
 
   # Other software
   environment.systemPackages = with pkgs; [
-    # Wrappers
-    (pkgs.writeScriptBin "youtube-dl" ''exec yt-dlp "$@"'')
-
-    # Rice / UX
+    # GNOME
     gnome.gnome-tweaks # App to change some hidden GNOME settings
     gnome.gnome-session
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
-    gnomeExtensions.blur-my-shell # Adds a blur look to different parts of the GNOME Shell
     gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
     gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
-    gnomeExtensions.user-themes # Custom shell themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
+
+    # Theming
+    adw-gtk3
 
     # Media
     ffmpeg
@@ -68,11 +66,6 @@
       noto-fonts-cjk
     ];
     fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
-  };
-
-  qt5 = {
-    enable = true;
-    platformTheme = "qt5ct";
   };
 
   services.power-profiles-daemon.enable = false;
