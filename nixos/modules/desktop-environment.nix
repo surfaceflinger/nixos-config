@@ -8,13 +8,16 @@
     desktopManager.gnome.enable = true;
   };
 
+  # Debloat
   environment.gnome.excludePackages =
     (with pkgs; [
+      gnome-connections
       gnome-console
       gnome-photos
       gnome-text-editor
       gnome-tour
       gnome-user-docs
+      orca
     ])
     ++ (with pkgs.gnome; [
       baobab
@@ -24,12 +27,17 @@
       geary
       gedit
       gnome-characters
+      gnome-clocks
       gnome-contacts
+      gnome-font-viewer
       gnome-logs
       gnome-maps
       gnome-music
+      gnome-shell-extensions
       gnome-software
       gnome-system-monitor
+      gnome-themes-extra
+      gnome-weather
       simple-scan
       totem
       yelp
@@ -38,22 +46,17 @@
   # Other software
   environment.systemPackages = with pkgs; [
     # GNOME
-    gnome.gnome-tweaks # App to change some hidden GNOME settings
-    gnome.gnome-session
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
-    gnomeExtensions.dash-to-panel # Basically Windows-like UX for gnome
     gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
+    gnome.gnome-session
 
     # Theming
     adw-gtk3
 
-    # Media
-    ffmpeg
-
     # System utilities
-    glxinfo # Check if your mesa broke again or "benchmark" your """"gpu"""" with glxgears
-    libva-utils # Check if VAAPI broke again
+    glxinfo
+    libva-utils
   ];
 
   programs.gnome-terminal.enable = true;
@@ -68,9 +71,9 @@
     fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
   };
 
-  services.power-profiles-daemon.enable = false;
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
-  services.flatpak.enable = true;
   programs.gamemode.enable = true;
   security.unprivilegedUsernsClone = true;
+  services.flatpak.enable = true;
+  services.power-profiles-daemon.enable = false;
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 }
