@@ -48,6 +48,7 @@
     # GNOME
     gnomeExtensions.appindicator # Adds appindicators and tray to top bar/dash to panel
     gnomeExtensions.gamemode # Shows Feral GameMode status through notifications and tray
+    gnomeExtensions.user-themes
     gnomeExtensions.window-is-ready-remover # Removes annoying GNOME notification
     gnome.gnome-session
 
