@@ -2,34 +2,36 @@
   # Other software
   environment.systemPackages = with pkgs; [
     # Rice / UX
-    zsh-fast-syntax-highlighting # Syntax highlighting for zsh
+    zsh-fast-syntax-highlighting
 
     # CLI/TUI tools
-    alejandra # nix beautifier (in Rust 🚀)
-    nano # vim is useless
+    alejandra
+    deadnix
+    nano
     ncdu
     p7zip
-    screen # Terminal multiplexer
-    tree # List contents of directories in a tree-like format
-    wget # Retrieving files using HTTP, HTTPS, FTP and FTPS
+    screen
+    tree
+    wget
     binwalk
     file
     magic-wormhole-rs
 
     # System utilities
-    htop # TUI task manager
+    htop
     lm_sensors
-    pfetch # Command-line system information tool
+    pfetch
     pciutils
-    psmisc # killall
-    usbutils # why, why isnt my pendrive working????? i have hardened profile btw
+    psmisc
+    usbutils
 
     # Development
-    git # Distributed version control
+    git
 
     # Networking
-    bind # nslookup/dig
+    bind
     nload
+    whois
   ];
 
   programs.nano.nanorc = ''

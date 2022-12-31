@@ -7,18 +7,19 @@
     quasselClient
     tdesktop
     xfce.mousepad
-    newsboat
+    textpieces
+    apostrophe
 
     # Media
     krita
     lollypop
     mpv
-    nicotine-plus
-    obs-studio
     yt-dlp
+    newsflash
+    curtail
 
     # Gaming
     gamescope
-    prismlauncher-qt5
+    prismlauncher
   ];
 }
