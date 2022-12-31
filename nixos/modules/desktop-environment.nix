@@ -54,7 +54,6 @@
 
     # Theming
     adw-gtk3
-    colloid-icon-theme
 
     # System utilities
     glxinfo
