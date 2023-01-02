@@ -11,7 +11,7 @@
     apostrophe
 
     # Media
-    krita
+    # krita
     lollypop
     mpv
     yt-dlp
