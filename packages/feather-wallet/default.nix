@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
   };
 
   desktopItem = makeDesktopItem {
-    name = name;
+    inherit name;
     desktopName = "Feather Wallet";
     comment = "A free Monero desktop wallet";
     icon = name;
