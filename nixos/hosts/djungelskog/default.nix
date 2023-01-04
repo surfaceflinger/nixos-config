@@ -1,7 +1,6 @@
-{
-  inputs,
-  modulesPath,
-  ...
+{ inputs
+, modulesPath
+, ...
 }: {
   imports = [
     # Hardware
@@ -26,15 +25,15 @@
       version = 2;
       device = "/dev/disk/by-id/ata-IR-SSDPR-S25A-240_GU2036937";
     };
-    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc"];
-    kernelModules = ["kvm-intel"];
+    initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
+    kernelModules = [ "kvm-intel" ];
   };
 
   # Misc
   networking.hostName = "djungelskog";
 
   # GPU
-  environment.variables = {MESA_LOADER_DRIVER_OVERRIDE = "crocus";};
+  environment.variables = { MESA_LOADER_DRIVER_OVERRIDE = "crocus"; };
 
   # thinkpad_acpi doesn't load on coreboot
   boot.extraModprobeConfig = "options thinkpad_acpi force_load=1 fan_control=1";

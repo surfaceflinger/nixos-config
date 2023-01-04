@@ -1,5 +1,5 @@
-{...}: {
-  imports = [./networking-base.nix];
+{ ... }: {
+  imports = [ ./networking-base.nix ];
 
   networking = {
     useDHCP = false;

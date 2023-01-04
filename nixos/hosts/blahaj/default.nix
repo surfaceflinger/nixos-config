@@ -1,9 +1,8 @@
-{
-  config,
-  inputs,
-  pkgs,
-  modulesPath,
-  ...
+{ config
+, inputs
+, pkgs
+, modulesPath
+, ...
 }: {
   imports = [
     # Hardware
@@ -36,9 +35,9 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
-    extraModulePackages = [config.boot.kernelPackages.rtl8821cu];
-    kernelModules = ["kvm-intel" "8821cu"];
+    initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    extraModulePackages = [ config.boot.kernelPackages.rtl8821cu ];
+    kernelModules = [ "kvm-intel" "8821cu" ];
   };
 
   # Misc

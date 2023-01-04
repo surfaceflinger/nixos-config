@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   imports = [
     ../modules/base.nix
     ../modules/chromium.nix
@@ -12,5 +12,6 @@
     ../modules/tools-desktop.nix
   ];
 
+  services.thermald.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
 }

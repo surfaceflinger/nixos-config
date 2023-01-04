@@ -1,13 +1,13 @@
 {
   # This one brings our custom packages from the 'packages' directory
-  additions = final: _prev: import ../packages {pkgs = final;};
+  additions = final: _prev: import ../packages { pkgs = final; };
 
   modifications = final: prev: {
     # Enable OpenASAR for Discord.
-    discord = prev.discord.override {withOpenASAR = true;};
+    discord = prev.discord.override { withOpenASAR = true; };
     # Enable global dark mode in Google Chrome (Chromium still can't set prefers-color-scheme properly from GTK theme)
-    chromium = prev.chromium.override {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";};
+    chromium = prev.chromium.override { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; };
     # Install mpv with scripts
-    mpv = prev.wrapMpv prev.mpv-unwrapped {scripts = [prev.mpvScripts.youtube-quality prev.mpvScripts.mpris];};
+    mpv = prev.wrapMpv prev.mpv-unwrapped { scripts = [ prev.mpvScripts.youtube-quality prev.mpvScripts.mpris ]; };
   };
 }

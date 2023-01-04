@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   services.xserver = {
     enable = true;
     displayManager.gdm = {
@@ -69,12 +69,12 @@
       noto-fonts
       noto-fonts-cjk
     ];
-    fontconfig.defaultFonts.emoji = ["Apple Color Emoji"];
+    fontconfig.defaultFonts.emoji = [ "Apple Color Emoji" ];
   };
 
   programs.gamemode.enable = true;
   security.unprivilegedUsernsClone = true;
   services.flatpak.enable = true;
   services.power-profiles-daemon.enable = false;
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 }

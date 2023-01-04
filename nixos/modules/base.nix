@@ -1,9 +1,8 @@
-{
-  config,
-  pkgs,
-  lib,
-  outputs,
-  ...
+{ config
+, pkgs
+, lib
+, outputs
+, ...
 }: {
   # zram swap
   zramSwap = {
@@ -27,8 +26,8 @@
       enable = true;
       extraRules = [
         {
-          users = ["root"];
-          groups = ["wheel"];
+          users = [ "root" ];
+          groups = [ "wheel" ];
           keepEnv = true;
           persist = true;
         }

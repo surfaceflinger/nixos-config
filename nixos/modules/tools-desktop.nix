@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  imports = [./tools-standard.nix];
+{ pkgs, ... }: {
+  imports = [ ./tools-standard.nix ];
 
   environment.systemPackages = with pkgs; [
     # Desktop software
@@ -8,7 +8,6 @@
     tdesktop
     xfce.mousepad
     textpieces
-    apostrophe
 
     # Media
     # krita

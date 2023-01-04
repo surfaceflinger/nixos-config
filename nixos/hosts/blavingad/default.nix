@@ -1,8 +1,7 @@
-{
-  pkgs,
-  inputs,
-  modulesPath,
-  ...
+{ pkgs
+, inputs
+, modulesPath
+, ...
 }: {
   imports = [
     # Hardware
@@ -31,8 +30,8 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
-      kernelModules = ["nvme"];
+      availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
+      kernelModules = [ "nvme" ];
     };
     cleanTmpDir = true;
   };
