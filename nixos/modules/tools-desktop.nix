@@ -10,7 +10,7 @@
     textpieces
 
     # Media
-    # krita
+    krita
     lollypop
     mpv
     yt-dlp
