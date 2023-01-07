@@ -38,12 +38,8 @@
   # Other software
   environment.systemPackages = with pkgs; [
     (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
-    gnupg
   ];
-  programs = {
-    gnupg.agent.enable = true;
-    zsh.enable = true;
-  };
+  programs.zsh.enable = true;
   services.journald.extraConfig = "Storage=volatile";
 
   # Limit amount of generations
