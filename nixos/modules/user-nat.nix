@@ -6,9 +6,9 @@
     extraGroups = [ "wheel" "libvirtd" "networkmanager" "adbusers" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBeWbH2L99MoMuT2a1nzmpI86VBht/io2TBraa2Pe98F nat@sparkle"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANRmkBgx14Oa1CKUQfS76V0ixEJzKhHlM8XF7qqiapa nat@apricot"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEqJ6aKTV33D1iZcuEw86lQ6QxmcfqIEcpBs4Da7GjI2 hanoip"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGeYYGkVH8pPo1f769OHYn6Vga6wnhftJA6w2IJADzgs nat@blahaj"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEBoE8OnT+YbaLQJFPvZIbmh+6FP252Jk93AyZiF86Y4 nat@djungelskog"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSqGOe/GfjCXruEaDqvPNSY72rTKiQNnX3x/Ey1ajB+ hanoip"
     ];
   };
 
