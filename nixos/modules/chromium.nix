@@ -6,7 +6,6 @@
   programs.chromium = {
     enable = true;
     extraOpts = {
-      "DefaultJavaScriptJitSetting" = 2;
       "HistoryClustersVisible" = false;
       "SavingBrowserHistoryDisabled" = true;
     };
