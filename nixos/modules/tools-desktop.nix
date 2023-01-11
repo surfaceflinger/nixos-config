@@ -3,6 +3,7 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop software
+    filen-desktop
     qbittorrent
     quasselClient
     tdesktop
