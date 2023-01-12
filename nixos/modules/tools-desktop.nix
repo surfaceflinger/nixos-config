@@ -17,6 +17,7 @@
     yt-dlp
     newsflash
     curtail
+    shotwell
 
     # Gaming
     gamescope
